@@ -235,20 +235,35 @@ def pastor_admin_desk(request):
         'all_events': ChurchEvent.objects.all(),
         'grid_images': ChurchImage.objects.all(),
         'slider_assets': ChurchGalleryAsset.objects.all(),
-        # ⚡ CRITICAL REVERSE SORTING FIX: Pushes raw congregational messages directly onto your admin view table
         'pending_prayers': PrayerRequest.objects.filter(is_reviewed_by_pastor=False).order_by('-date_submitted'),
     }
     return render(request, 'pastor_admin_desk.html', context)
 
+
 # =====================================================
-# ⚡ OPERATIONAL TRIGGER ENGINES FOR INTERCESSION HISTORY
+# ⚡ OPERATIONAL TRIGGER ENGINES FOR MANAGEMENT DESK
 # =====================================================
 @user_passes_test(is_church_admin, login_url='/admin/login/')
+def edit_gallery_asset(request, asset_id):
+    """
+    Captures text title changes submitted by pastors for specific slideshow items
+    and updates the database record cleanly with a success notification.
+    """
+    asset = get_object_or_404(ChurchGalleryAsset, id=asset_id)
+    if request.method == "POST":
+        new_title = request.POST.get('updated_title', '').strip()
+        if new_title:
+            asset.title = new_title
+            asset.save()
+            messages.success(request, f"🎉 Slideshow title updated successfully to '{new_title}'.")
+        else:
+            messages.warning(request, "⚠️ Title cannot be blank.")
+    return redirect('pastor_admin_desk')
+
+
+@user_passes_test(is_church_admin, login_url='/admin/login/')
 def mark_prayer_reviewed(request, prayer_id):
-    """
-    Action link route that flips a prayer request's status flag to True,
-    moving it safely from the active queue into archived intercessory history logs.
-    """
+    """Flags an active prayer instance item database flag entry to True."""
     prayer = get_object_or_404(PrayerRequest, id=prayer_id)
     prayer.is_reviewed_by_pastor = True
     prayer.save()
@@ -256,6 +271,7 @@ def mark_prayer_reviewed(request, prayer_id):
     print(f"✅ PEFA Thika Road Pastoral Desk: Prayer Request #{prayer_id} marked as reviewed!")
     messages.success(request, f"🙏 Prayer petition from '{prayer.sender_name}' has been successfully reviewed and moved to archives.")
     return redirect('pastor_admin_desk')
+
 
 @user_passes_test(is_church_admin, login_url='/admin/login/')
 def delete_gallery_asset(request, asset_id, asset_type):
@@ -273,12 +289,10 @@ def delete_gallery_asset(request, asset_id, asset_type):
 
     return redirect('pastor_admin_desk')
 
+
 # =====================================================
 # 🔍 8. SYSTEM ERROR TEMPLATE ROUTER HANDLERS
 # =====================================================
 def custom_404_handler(request, exception=None):
-    """
-    Safely captures missing ministry url tracking coordinates and passes
-    the request down to your custom branded 404 page layout matrix.
-    """
+    """Safely captures missing ministry url tracking coordinates."""
     return render(request, '404.html', status=404)
