@@ -21,7 +21,7 @@ urlpatterns = [
     # ⛪ PASTOR'S PRIVATE LEADERSHIP PANEL & ACTION CHANNELS
     path('pastoral/dashboard/', views.pastor_dashboard, name='pastor_dashboard'),
 
-    # 🔒 NEW: PASTOR ADMINISTRATIVE CONTROL DESK (FOR UPLOADS AND CATALOG MANAGEMENT)
+    # 🔒 PASTOR ADMINISTRATIVE CONTROL DESK (FOR UPLOADS AND CATALOG MANAGEMENT)
     path('pastoral/admin-desk/', views.pastor_admin_desk, name='pastor_admin_desk'),
 
     # ⚡ OPERATIONAL TRIGGER ENGINES
@@ -29,6 +29,6 @@ urlpatterns = [
     path('pastoral/media/delete/<int:asset_id>/<str:asset_type>/', views.delete_gallery_asset,
          name='delete_gallery_asset'),
 
-    path('pastoral/admin-desk/', views.pastor_admin_desk, name='pastor_admin_desk'),
-
+    # ✏️ NEW: INLINE SLIDESHOW CAPTION MODIFICATION ROUTE ENDPOINT
+    path('pastoral/edit-asset/<int:asset_id>/', views.edit_gallery_asset, name='edit_gallery_asset'),
 ]
