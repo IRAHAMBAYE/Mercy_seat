@@ -17,8 +17,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# settings.py
-
 # Add this setting near your ALLOWED_HOSTS configuration
 CSRF_TRUSTED_ORIGINS = [
     'https://pefathikaroadcathedral-production-c4e2f9.up.railway.app',
@@ -68,27 +66,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'kingdom_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# =====================================================
+# 🗄️ DYNAMIC DATABASE HANDSHAKE CONTROL MATRIX
+# =====================================================
+# Intercepts standard database routing strings cleanly to maintain environment isolation
+database_env_url = os.environ.get('DATABASE_URL_PUBLIC') or os.environ.get('DATABASE_URL')
 
-
-
-# kingdom_project/settings.py
-
-# ⚡ CHOSEN SYNTAX UPGRADE: Keeps your clean setup while fixing live network blocks
-database_url = os.environ.get('DATABASE_URL_PUBLIC') or os.environ.get('DATABASE_URL')
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600
-    )
-}
-
-# If we are live on the cloud, ensure we overwrite with the accessible public address parameter
-if database_url:
-    DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600)
-
+if database_env_url:
+    # 📡 LIVE PRODUCTION ENVIRONMENT: Parsed securely via cloud public network lines
+    DATABASES = {
+        'default': dj_database_url.parse(database_env_url, conn_max_age=600)
+    }
+else:
+    # 💻 LOCAL DEVELOPMENT ENVIRONMENT: Fallback to standalone SQLite configuration for offline work
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -137,4 +133,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # 📂 Where Railway gathers all styles during build
-
