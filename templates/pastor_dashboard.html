@@ -1,0 +1,76 @@
+{% extends 'church_base.html' %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
+
+    <!-- 👑 PRIVATE DASHBOARD TERMINAL HEADER -->
+    <div style="background: linear-gradient(135deg, #0b1329 0%, #4a5568 100%); padding: 2.5rem; border-radius: 12px; color: #ffffff; margin-bottom: 3rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+            <div>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem;">Pastoral Leadership Space</span>
+                <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; margin: 0;">Ministry Metrics Dashboard</h1>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 0.5rem; margin-bottom: 0;">Real-time analytical metrics snapshot tracking the digital congregational outreach channels.</p>
+            </div>
+            <div>
+                <a href="{% url 'pastor_admin_desk' %}" class="btn-kingdom" style="background-color: #dfb15b; color: #0b1329; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: 800; font-size: 0.88rem;">⛪ Return to Administrative Desk</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 HIGH-CONTRAST METADATA COUNTER BLOCKS MATRIX GRID -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+        
+        <!-- Counter Box 1: Unread Prayer Requests Box -->
+        <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #ef4444; margin-bottom: 0;">
+            <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📥</span>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_pending }}</strong>
+            <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Unread Petitions</span>
+        </div>
+
+        <!-- Counter Box 2: Total Catalogued Sermons Media -->
+        <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #1e3a8a; margin-bottom: 0;">
+            <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📖</span>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_sermons }}</strong>
+            <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Published Sermons</span>
+        </div>
+
+        <!-- Counter Box 3: Total Scheduled Church Events Calendar -->
+        <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #475569; margin-bottom: 0;">
+            <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📅</span>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_events }}</strong>
+            <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Calendar Programs</span>
+        </div>
+
+    </div>
+
+    <!-- 📜 HISTORICAL ARCHIVED REVIEWS ROW MODULE -->
+    <div class="sanctuary-card" style="padding: 2.5rem; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #0b1329; margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.75rem;">📋 Recently Cleared &amp; Archived Intercessory History</h3>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; min-width: 600px;">
+                <thead>
+                    <tr style="background-color: #f8fafc; border-bottom: 2px solid #e2e8f0; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.78rem;">
+                        <th style="padding: 1rem;">Congregant Name</th>
+                        <th style="padding: 1rem;">Callback Phone</th>
+                        <th style="padding: 1rem; width: 60%;">Petition Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prayer in reviewed_prayers %}
+                        <tr style="border-bottom: 1px solid #f1f5f9; color: #4a5568;">
+                            <td style="padding: 1rem; font-weight: 700; color: #64748b;">👤 {{ prayer.sender_name }}</td>
+                            <td style="padding: 1rem; font-weight: 600;">{{ prayer.sender_phone|default:"None Provided" }}</td>
+                            <td style="padding: 1rem; line-height: 1.4; font-style: italic;">"{{ prayer.prayer_items }}"</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3" style="padding: 2rem; text-align: center; color: #94a3b8; font-weight: 500;">No archived intercessory history records found. Cleared items populate automatically here.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
