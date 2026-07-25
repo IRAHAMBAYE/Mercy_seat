@@ -73,12 +73,21 @@ WSGI_APPLICATION = 'kingdom_project.wsgi.application'
 
 
 
+# kingdom_project/settings.py
+
+# ⚡ CHOSEN SYNTAX UPGRADE: Keeps your clean setup while fixing live network blocks
+database_url = os.environ.get('DATABASE_URL_PUBLIC') or os.environ.get('DATABASE_URL')
+
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600
     )
 }
+
+# If we are live on the cloud, ensure we overwrite with the accessible public address parameter
+if database_url:
+    DATABASES['default'] = dj_database_url.parse(database_url, conn_max_age=600)
 
 
 
