@@ -1,0 +1,73 @@
+{% extends 'church_base.html' %}
+
+{% block title %}Upcoming Events &amp; Conferences | PEFA Thika Road Sanctuary{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- Header Hero Section Layout Box -->
+    <div style="text-align: center; margin-bottom: 3.5rem;">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #eab308; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Kingdom Calendar</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; margin: 0 0 0.5rem 0;">Upcoming Conferences &amp; Ministry Events</h1>
+        <p style="font-size: 0.95rem; color: #64748b; max-width: 520px; margin: 0 auto; font-weight: 500; line-height: 1.5;">
+            Mark your calendar and prepare your heart for our upcoming prophetic conferences, breakthrough revival assemblies, and specialized department fellowships.
+        </p>
+    </div>
+
+    <!-- ⚡ HIGH-CONTRAST CHRONOLOGICAL EVENTS STACK MATRIX -->
+    <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto;" class="mobile-events-stack">
+        {% for event in events %}
+            <div class="sanctuary-card" style="padding: 0; overflow: hidden; display: grid; grid-template-columns: 200px 1fr; border-left: 5px solid #eab308; margin-bottom: 0;">
+
+                <!-- Left Chronological Date Accent Block Panel -->
+                <div style="background-color: #0f172a; color: #ffffff; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                    <span style="font-size: 2.25rem; font-weight: 800; color: #eab308; line-height: 1; letter-spacing: -0.02em;">{{ event.date|date:"d" }}</span>
+                    <span style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; color: #cbd5e1;">{{ event.date|date:"M Y" }}</span>
+                </div>
+
+                <!-- Right Information Metadata Content Panel -->
+                <div style="padding: 2rem; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+                    <div>
+                        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">{{ event.title }}</h3>
+                        <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.75rem;">{{ event.description }}</p>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid #f1f5f9; padding-top: 1rem; font-size: 0.82rem; font-weight: 700; color: #64748b;">
+                        <span>🕒 Time: {{ event.start_time|date:"h:i A" }}</span>
+                        <span>📍 Venue: {{ event.location }}</span>
+                    </div>
+                </div>
+
+            </div>
+        {% empty %}
+            <!-- Clean Empty Fallback Box Layout Block -->
+            <div class="sanctuary-card" style="text-align: center; padding: 5rem 2rem; border-style: dashed; border-color: #cbd5e1; width: 100%;">
+                <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">📅</span>
+                <p style="margin: 0; font-size: 0.92rem; font-weight: 600; color: #64748b;">No upcoming church conferences or events scheduled on the ministry calendar for this period yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- 📱 SMARTPHONE COMPACT SCREEN MEDIA ADAPTERS -->
+<style>
+    @media (max-width: 640px) {
+        .mobile-events-stack .sanctuary-card {
+            grid-template-columns: 1fr !important;
+            border-left: none !important;
+            border-top: 5px solid #eab308 !important;
+        }
+        .mobile-events-stack div[style*="background-color: #0f172a"] {
+            padding: 1.25rem !important;
+            flex-direction: row !important;
+            gap: 0.5rem !important;
+        }
+        .mobile-events-stack span[style*="font-size: 2.25rem"] {
+            font-size: 1.5rem !important;
+        }
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'church_base.html' %}
+
+{% block content %}
+<div class="container" style="max-width: 650px; margin: 0 auto; padding: 1rem;">
+
+    <!-- ⛪ PASTORS PRAYER DESK PANEL -->
+    <div class="sanctuary-card">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🙏</span>
+            <h2 style="font-size: 1.75rem; font-weight: 800; color: #0b1329; letter-spacing: -0.02em;">Pastoral Prayer Desk</h2>
+            <p style="font-size: 0.9rem; color: #4a5568; margin-top: 0.5rem; line-height: 1.5;">
+                "For where two or three are gathered together in my name, there am I in the midst of them." — Matthew 18:20
+            </p>
+        </div>
+
+        <!-- 🚀 PUBLIC PRAYER REQUEST SUBMISSION FORM -->
+        <form method="POST" action="{% url 'prayer_desk' %}">
+            {% csrf_token %}
+
+            <!-- Field 1: Full Name Input Component -->
+            <div style="margin-bottom: 1.75rem;">
+                <label style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #0b1329; display: block; margin-bottom: 0.25rem;">
+                    Your Name (Leave blank for Anonymous)
+                </label>
+                <input type="text"
+                       name="fullname"
+                       class="form-church-control"
+                       placeholder="e.g. Sister Mary Wanjiku"
+                       style="margin-top: 0;">
+            </div>
+
+            <!-- Field 2: Phone Callback Input Component -->
+            <div style="margin-bottom: 1.75rem;">
+                <label style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #0b1329; display: block; margin-bottom: 0.25rem;">
+                    Phone Number (Optional for Pastoral Callback)
+                </label>
+                <input type="text"
+                       name="phone"
+                       class="form-church-control"
+                       placeholder="e.g. 0720000000"
+                       style="margin-top: 0;">
+            </div>
+
+            <!-- Field 3: Prayer Textarea Component -->
+            <div style="margin-bottom: 2.25rem;">
+                <label style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #0b1329; display: block; margin-bottom: 0.25rem;">
+                    Key in your prayer items / request details *
+                </label>
+                <textarea name="prayer_item"
+                          class="form-church-control"
+                          style="min-height: 150px; resize: vertical; margin-top: 0;"
+                          placeholder="Type your family needs, petitions, or breakthrough requests here..."
+                          required></textarea>
+            </div>
+
+            <!-- Submission Trigger Button Accent -->
+            <button type="submit" class="btn-kingdom" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background-color: #0b1329; color: #ffffff;">
+                🚀 Submit Prayer Request to Pastor
+            </button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

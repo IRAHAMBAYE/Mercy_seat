@@ -1,0 +1,358 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>{% block title %}PEFA Thika Road | Sanctuary of Praise &amp; Glory{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
+
+    <!-- 🎨 THE ROYAL ALTAR EDITORIAL DESIGN SYSTEM -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+            background-color: #fcfbfa; /* Pure Altar Sand Soft Canvas */
+            color: #0b1329; /* Deep Velvet Navy */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.65;
+            letter-spacing: -0.02em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .main-sanctuary-content {
+            flex-grow: 1;
+            padding: 4rem 0;
+        }
+
+        /* ⛪ ELEVATED MINIMALIST NAVBAR NAVIGATION BAR */
+        .church-nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid rgba(11, 19, 41, 0.06);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+            box-shadow: 0 10px 40px -20px rgba(11, 19, 41, 0.05);
+        }
+
+        /* 🎯 THREE-COLUMN CENTER ALIGNMENT MATRIX GRID */
+        .nav-flex {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-left-brand {
+            justify-self: start;
+        }
+        .nav-center-menu {
+            justify-self: center;
+            list-style: none;
+        }
+        .nav-right-actions {
+            justify-self: end;
+            list-style: none;
+        }
+
+        .church-brand {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #0b1329;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .church-brand span {
+            color: #dfb15b; /* Polished Refinery Gold */
+            font-weight: 400;
+        }
+
+        /* 📱 RESPONSIVE ANDROID / MOBILE DROPDOWN SYSTEM */
+        .church-dropdown-wrapper {
+            position: relative;
+        }
+        .dropdown-trigger-btn {
+            color: #4a5568;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            user-select: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(11, 19, 41, 0.06);
+            border-radius: 20px;
+            background-color: #faf9f6;
+            transition: all 0.2s ease;
+        }
+        .dropdown-trigger-btn:hover {
+            color: #dfb15b;
+            border-color: rgba(223, 177, 91, 0.3);
+            background-color: #ffffff;
+        }
+        .dropdown-trigger-btn::after {
+            content: "▼";
+            font-size: 0.55rem;
+            color: #a0aec0;
+            transition: transform 0.2s ease;
+        }
+        /* Dropdown Overlay Floating Body Menu Card */
+        .church-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            min-width: 220px;
+            border-radius: 8px;
+            border: 1px solid rgba(11, 19, 41, 0.08);
+            box-shadow: 0 15px 35px -5px rgba(11, 19, 41, 0.12);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            z-index: 10005;
+        }
+
+        /* Desktop Hover Trigger Interaction */
+        @media (min-width: 769px) {
+            .church-dropdown-wrapper:hover .church-dropdown-menu {
+                display: block;
+                animation: menuFadeInSlide 0.2s ease-out;
+            }
+            .church-dropdown-wrapper:hover .dropdown-trigger-btn::after {
+                transform: rotate(180deg);
+                color: #dfb15b;
+            }
+        }
+
+        /* Click Toggle Utility Class for Touch Screens */
+        .show-mobile-menu {
+            display: block !important;
+        }
+
+        .church-dropdown-menu li {
+            list-style: none;
+            width: 100%;
+        }
+        .church-dropdown-menu a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #4a5568;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .church-dropdown-menu a:hover {
+            background-color: #faf9f6;
+            color: #dfb15b;
+            padding-left: 1.75rem;
+        }
+
+        @keyframes menuFadeInSlide {
+            from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        /* Premium Gold Giving Call-To-Action Button Layer */
+        .btn-give-accent {
+            background-color: #dfb15b !important;
+            color: #ffffff !important;
+            padding: 0.65rem 1.25rem;
+            border-radius: 4px;
+            font-weight: 800 !important;
+            font-size: 0.8rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            box-shadow: 0 6px 15px -5px rgba(223, 177, 91, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-give-accent:hover {
+            background-color: #0b1329 !important;
+            box-shadow: 0 6px 15px -5px rgba(11, 19, 41, 0.3);
+        }
+        /* 📑 LUXURY EDITORIAL SANCTUARY CARDS */
+        .sanctuary-card {
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid rgba(11, 19, 41, 0.05);
+            box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03);
+            padding: 3.5rem 3rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        .sanctuary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 55px -20px rgba(11, 19, 41, 0.06);
+            border-color: rgba(223, 177, 91, 0.3);
+        }
+        /* 🚀 MAJESTIC SEED ACTION BUTTONS */
+        .btn-kingdom {
+            display: inline-block;
+            width: 100%;
+            padding: 1.1rem 2.25rem;
+            background-color: #0b1329;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-align: center;
+            border-radius: 4px;
+            border: none;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .btn-kingdom:hover {
+            background-color: #dfb15b;
+            color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(223, 177, 91, 0.3);
+        }
+
+        /* 🎛️ SOFT ARCHITECTURAL TEXT CONTROLS */
+        .form-church-control {
+            width: 100%;
+            padding: 1.1rem 1.25rem;
+            background-color: #faf9f6;
+            border: 1px solid rgba(11, 19, 41, 0.08);
+            border-radius: 4px;
+            color: #0b1329;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.25s ease;
+            margin-top: 0.5rem;
+        }
+
+        /* 📱 ULTRA-READABLE MOBILE ANDROID BREAKPOINTS */
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .church-nav { padding: 1rem 0; }
+
+            /* Fall back to standard flex layout on small screens to fit text widths */
+            .nav-flex {
+                display: flex !important;
+                justify-content: space-between !important;
+            }
+            .church-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: auto;
+                right: 0;
+                transform: none;
+                width: 260px;
+                max-width: calc(100vw - 2rem);
+            }
+            @keyframes menuFadeInSlide {
+                from { opacity: 0; transform: translateY(5px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .main-sanctuary-content { padding: 2.5rem 0 !important; }
+            .sanctuary-card { padding: 2rem 1.25rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION ATRIUM -->
+<nav class="church-nav">
+    <div class="container nav-flex">
+
+        <!-- Left Column: Branding Logo -->
+        <div class="nav-left-brand">
+            <a href="/" class="church-brand">
+                ⛪ PEFA <span>Thika Road</span>
+            </a>
+        </div>
+
+        <!-- Middle Column: Dynamic Centered Menu Trigger -->
+        <div class="nav-center-menu">
+            <li class="church-dropdown-wrapper">
+                <span class="dropdown-trigger-btn" id="mobileMenuTrigger">☰ Menu Atrium</span>
+                <ul class="church-dropdown-menu" id="churchDropdownMenu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/sermons/">Sermons Center</a></li>
+                    <li><a href="/events/">Events Log</a></li>
+
+                    <!-- 🔒 DYNAMIC STAFF SECURITY LINK ROW -->
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff or user.is_superuser %}
+                            <li style="border-top: 1px dashed rgba(11, 19, 41, 0.08); margin-top: 0.25rem;"><a href="{% url 'pastor_admin_desk' %}" style="color: #dfb15b;">⛪ Admin Desk</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </li>
+        </div>
+
+        <!-- Right Column: Contribution Action Accent Button -->
+        <div class="nav-right-actions">
+            <li><a href="/give/" class="btn-give-accent">💸 Giving</a></li>
+        </div>
+
+    </div>
+</nav>
+
+<!-- MOBILE COHESION TAP TRIGGER EVENT SCRIPTS -->
+<script>
+    document.getElementById('mobileMenuTrigger').addEventListener('click', function(e) {
+        e.stopPropagation();
+        document.getElementById('churchDropdownMenu').classList.toggle('show-mobile-menu');
+    });
+    document.addEventListener('click', function() {
+        document.getElementById('churchDropdownMenu').classList.remove('show-mobile-menu');
+    });
+</script>
+
+<!-- SYSTEM NOTIFICATION EMBED CHANNEL -->
+{% if messages %}
+<div class="container" style="margin-top: 1.5rem;">
+    {% for message in messages %}
+        <div style="background-color: #fcfbfa; color: #0b1329; padding: 1rem 1.25rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; border: 1px solid rgba(11, 19, 41, 0.08); border-left: 4px solid #dfb15b;">
+            ✨ {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- TEMPLATE VIEWS MOUNT DESK -->
+<main class="main-sanctuary-content">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- REGAL MINISTRY FOOTER CANVAS -->
+<footer style="background-color: #0b1329; color: #ffffff; border-top: 3px solid #dfb15b; padding: 4rem 0; text-align: center; margin-top: auto;">
+    <div class="container">
+        <p style="margin: 0 0 0.5rem 0; font-weight: 900; font-size: 1.2rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ffffff;">PEFA Church Thika Road Sanctuary</p>
+        <p style="margin: 0 0 2rem 0; font-size: 0.85rem; color: #94a3b8; font-weight: 500;">A Christ-Centered Ministry &bull; Transforming Generations</p>
+
+        <div style="width: 30px; height: 1px; background-color: rgba(255,255,255,0.1); margin: 0 auto 2rem auto;"></div>
+
+        <p style="margin: 0; font-size: 0.78rem; color: #64748b; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5;">
+            &copy; {% now "Y" %} PEFA Thika Road &bull; Offered to Glory by <strong>Taylor</strong> — Nairobi.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
