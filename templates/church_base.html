@@ -8,6 +8,9 @@
 
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
 
+    <!-- 📊 LIVE LOCAL STATIC CHARTING ENGINE LINK (Loads instantly from your laptop hard drive) -->
+    <script src="{% static 'core/js/chart.js' %}" defer></script>
+
     <!-- 🎨 THE ROYAL ALTAR EDITORIAL DESIGN SYSTEM -->
     <style>
         * {
@@ -15,6 +18,7 @@
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
             background-color: #fcfbfa; /* Pure Altar Sand Soft Canvas */
@@ -131,6 +135,11 @@
             z-index: 10005;
         }
 
+        /* Keep mobile-only items completely invisible on desktop layouts */
+        .mobile-only-item {
+            display: none !important;
+        }
+
         /* Desktop Hover Trigger Interaction */
         @media (min-width: 769px) {
             .church-dropdown-wrapper:hover .church-dropdown-menu {
@@ -229,7 +238,6 @@
             color: #ffffff;
             box-shadow: 0 10px 25px -5px rgba(223, 177, 91, 0.3);
         }
-
         /* 🎛️ SOFT ARCHITECTURAL TEXT CONTROLS */
         .form-church-control {
             width: 100%;
@@ -243,29 +251,54 @@
             transition: all 0.25s ease;
             margin-top: 0.5rem;
         }
-
-        /* 📱 ULTRA-READABLE MOBILE ANDROID BREAKPOINTS */
+        /* 📱 ULTRA-READABLE MOBILE BREAKPOINTS WITH TWO-TIER STACKING */
         @media (max-width: 768px) {
             .container { padding: 0 1rem; }
-            .church-nav { padding: 1rem 0; }
+            .church-nav { padding: 0.85rem 0; }
 
-            /* Fall back to standard flex layout on small screens to fit text widths */
+            /* Re-architect to single-column flex structure to fit mobile displays */
             .nav-flex {
                 display: flex !important;
-                justify-content: space-between !important;
+                flex-direction: column !important;
+                gap: 0.65rem;
+                align-items: center !important;
+                text-align: center;
             }
+            .nav-left-brand {
+                justify-self: center;
+                margin-bottom: 0.15rem;
+            }
+            .nav-center-menu {
+                display: block !important;
+                width: auto;
+            }
+
+            /* Hide the separate header desktop column container on small views */
+            .nav-right-actions {
+                display: none !important;
+            }
+
+            /* Force the mobile giving element to show within the dropdown box stack */
+            .church-dropdown-menu .mobile-only-item {
+                display: block !important;
+                border-bottom: 1px dashed rgba(11, 19, 41, 0.08);
+                padding-bottom: 0.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            /* Re-align mobile menu to overlay neatly beneath the middle button placement */
             .church-dropdown-menu {
                 position: absolute;
                 top: 100%;
-                left: auto;
-                right: 0;
-                transform: none;
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
                 width: 260px;
                 max-width: calc(100vw - 2rem);
             }
             @keyframes menuFadeInSlide {
-                from { opacity: 0; transform: translateY(5px); }
-                to { opacity: 1; transform: translateY(0); }
+                from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+                to { opacity: 1; transform: translateX(-50%) translateY(0); }
             }
             .main-sanctuary-content { padding: 2.5rem 0 !important; }
             .sanctuary-card { padding: 2rem 1.25rem !important; }
@@ -278,21 +311,30 @@
 <nav class="church-nav">
     <div class="container nav-flex">
 
-        <!-- Left Column: Branding Logo -->
+        <!-- Left Column: Branding Logo updated to Cathedral text rules -->
         <div class="nav-left-brand">
             <a href="/" class="church-brand">
-                ⛪ PEFA <span>Thika Road</span>
+                ⛪ PEFA <span>Thika Road Cathedral</span>
             </a>
         </div>
 
-        <!-- Middle Column: Dynamic Centered Menu Trigger -->
+        <!-- Middle Column: Dynamic Centered Menu Trigger with Nested Responsive Giving Node -->
         <div class="nav-center-menu">
             <li class="church-dropdown-wrapper">
                 <span class="dropdown-trigger-btn" id="mobileMenuTrigger">☰ Menu Atrium</span>
                 <ul class="church-dropdown-menu" id="churchDropdownMenu">
+
+                    <!-- 💸 RESPONSIVE MOBILE-ONLY GIVING INJECTION LINK -->
+                    <li class="mobile-only-item">
+                        <a href="/give/" style="color: #dfb15b; font-weight: 900;">💸 Giving Portal</a>
+                    </li>
+
                     <li><a href="/">Home</a></li>
                     <li><a href="/sermons/">Sermons Center</a></li>
                     <li><a href="/events/">Events Log</a></li>
+
+                    <!-- ⛪ PUBLIC PROJECTS DIRECTORY LINK -->
+                    <li><a href="{% url 'projects_directory' %}" style="color: #0b1329; border-top: 1px dashed rgba(11, 19, 41, 0.08); padding-top: 0.8rem; margin-top: 0.25rem;">⛪ Cathedral Projects</a></li>
 
                     <!-- 🔒 DYNAMIC STAFF SECURITY LINK ROW -->
                     {% if user.is_authenticated %}
@@ -304,7 +346,7 @@
             </li>
         </div>
 
-        <!-- Right Column: Contribution Action Accent Button -->
+        <!-- Right Column: Contribution Action Accent Button (Automatically Hidden on Mobile viewports) -->
         <div class="nav-right-actions">
             <li><a href="/give/" class="btn-give-accent">💸 Giving</a></li>
         </div>
@@ -344,7 +386,7 @@
 <footer style="background-color: #0b1329; color: #ffffff; border-top: 3px solid #dfb15b; padding: 4rem 0; text-align: center; margin-top: auto;">
     <div class="container">
         <p style="margin: 0 0 0.5rem 0; font-weight: 900; font-size: 1.2rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ffffff;">PEFA Church Thika Road Cathedral</p>
-        <p style="margin: 0 0 2rem 0; font-size: 0.85rem; color: #94a3b8; font-weight: 500;">A Christ-Centered Ministry &bull; Transforming Generations</p>
+        <p style="margin: 0 0 2rem 0; font-size: 0.85rem; color: #94a3b8; font-weight: 500;"> A Christ-Centered Ministry &bull; Transforming Generations</p>
 
         <div style="width: 30px; height: 1px; background-color: rgba(255,255,255,0.1); margin: 0 auto 2rem auto;"></div>
 

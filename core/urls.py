@@ -31,4 +31,18 @@ urlpatterns = [
 
     # ✏️ NEW: INLINE SLIDESHOW CAPTION MODIFICATION ROUTE ENDPOINT
     path('pastoral/edit-asset/<int:asset_id>/', views.edit_gallery_asset, name='edit_gallery_asset'),
+
+    path('api/v1/mpesa/stk-callback/', views.mpesa_stk_callback, name='mpesa_stk_callback'),
+    path('api/v1/mpesa/c2b-validation/', views.mpesa_c2b_validation, name='mpesa_c2b_validation'),
+    path('api/v1/mpesa/c2b-confirmation/', views.mpesa_c2b_confirmation, name='mpesa_c2b_confirmation'),
+    # 💸 OUTWARD B2C WELFARE PAYMENT DISBURSEMENT ENGINE
+    path('pastoral/disburse-b2c/', views.trigger_pastoral_b2c, name='trigger_pastoral_b2c'),
+    # ⛪ CATHEDRAL DEVELOPMENT PROJECTS & PROGRESS MATRIX
+    path('projects/', views.projects_directory, name='projects_directory'),
+    path('projects/<slug:slug>/', views.project_detail, name='project_detail'),
+    # 📥 EXCEL TRANSACTION LEDGER SHEET EXPORTER PIPELINE
+    path('pastoral/dashboard/export-csv/', views.export_financial_ledger_csv, name='export_financial_ledger_csv'),
+    # 📥 EXCEL TRANSACTION SPREADSHEET IMPORTER ROUTE
+    path('pastoral/dashboard/import-csv/', views.import_financial_ledger_csv, name='import_financial_ledger_csv'),
+
 ]

@@ -59,3 +59,22 @@ class ChurchGalleryAssetForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'style': COMMON_INPUT_STYLE, 'placeholder': 'e.g. Sunday Main Worship Sliding Banner'}),
             'image': forms.FileInput(attrs={'style': COMMON_FILE_STYLE, 'accept': 'image/*'})
         }
+
+
+from django import forms
+from core.models import ChurchProject
+
+class ChurchProjectForm(forms.ModelForm):
+    class Meta:
+        model = ChurchProject
+        fields = ['title', 'description', 'target_amount', 'cover_image', 'is_active']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+        }
+
+
+class ExcelImportForm(forms.Form):
+    excel_file = forms.FileField(
+        label="Select Spreadsheet File (.csv)",
+        help_text="Upload an official church transaction backup sheet to process rows."
+    )

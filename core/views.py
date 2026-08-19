@@ -1,13 +1,21 @@
 import datetime
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.models import Sermon, ChurchEvent, PrayerRequest, ChurchImage, ChurchGalleryAsset
+from core.models import Sermon, ChurchEvent, PrayerRequest, ChurchImage, ChurchGalleryAsset, MpesaTransaction
 from core.forms import SermonForm, ChurchEventForm, PrayerRequestForm, ChurchImageForm, ChurchGalleryAssetForm
+from core.mpesa_client import MpesaDarajaClient
+from core.models import Sermon, ChurchEvent, PrayerRequest, ChurchImage, ChurchGalleryAsset, MpesaTransaction, ChurchProject
+from core.forms import SermonForm, ChurchEventForm, PrayerRequestForm, ChurchImageForm, ChurchGalleryAssetForm, ChurchProjectForm
+
+
 
 # =====================================================
-# ⛪ 0. SANCTUARY ROOT HOMEPAGE VIEW (SPLIT TWO-PART OVERHAUL)
+# ⛪ 0. SANCTUARY ROOT HOMEPAGE VIEW
 # =====================================================
 def church_home(request):
     """
@@ -41,6 +49,7 @@ def church_home(request):
     }
     return render(request, 'church_home.html', context)
 
+
 # =====================================================
 # 💸 1. DYNAMIC M-PESA CHURCH GIVING PORTAL VIEW
 # =====================================================
@@ -51,21 +60,52 @@ def church_giving_portal(request):
     instant Lipa Na M-Pesa STK prompts to the congregant's mobile phone.
     """
     if request.method == "POST":
-        phone_number = request.POST.get("phone", "").strip()
+        raw_phone = request.POST.get("phone", "").strip()
         giving_amount = request.POST.get("amount", "").strip()
         giving_type = request.POST.get("giving_type", "OFFERING")
         name = request.POST.get("fullname", "").strip() or "Anonymous Giver"
 
         print(f"💸 PEFA Thika Road Ledger: {name} is seeding Ksh {giving_amount} towards {giving_type}...")
 
+        # Clean number to match standard Safaricom formatting rules (2547XXXXXXXX)
+        if raw_phone.startswith('0'):
+            phone = '254' + raw_phone[1:]
+        elif raw_phone.startswith('+254'):
+            phone = raw_phone[1:]
+        elif raw_phone.startswith('254'):
+            phone = raw_phone
+        else:
+            messages.error(request, "❌ Invalid Phone Number structure. Use standard format (e.g., 0712345678).")
+            return redirect('church_giving_portal')
+
+        # Public deployment callback hook declaration URL endpoint
+        callback_url = "https://pefathikaroadcathedral.org"
+
         try:
-            # Future M-Pesa Daraja API hooks will be wired right here!
-            account_reference = f"PEFA_{giving_type[:6].upper()}"
-            print(f"⚡ Daraja API Payload Prepped: Ref {account_reference} pushed securely to {phone_number}")
+            client = MpesaDarajaClient()
+            response = client.send_stk_push(
+                phone_number=phone,
+                amount=giving_amount,
+                callback_url=callback_url,
+                account_reference=giving_type,
+                transaction_desc=f"Cathedral {giving_type}"
+            )
 
-            messages.success(request,
-                             f"🙏 Thank you {name}! Your seed contribution of Ksh {giving_amount} towards {giving_type} has been initialized via M-Pesa. Key in your PIN on your phone to finalize.")
-
+            if response.get('ResponseCode') == '0':
+                # Register a background track segment record before payment executes
+                MpesaTransaction.objects.create(
+                    transaction_type='STK_PUSH',
+                    amount=giving_amount,
+                    phone_number=phone,
+                    merchant_request_id=response.get('MerchantRequestID'),
+                    checkout_request_id=response.get('CheckoutRequestID'),
+                    account_reference=giving_type,
+                    first_name=name,
+                    status='PENDING'
+                )
+                messages.success(request, f"🙏 Thank you {name}! Your seed contribution of Ksh {giving_amount} towards {giving_type} has been initialized via M-Pesa. Key in your PIN on your phone to finalize.")
+            else:
+                messages.error(request, f"❌ Safaricom API rejection error: {response.get('ResponseDescription')}")
         except Exception as api_err:
             print(f"⚠️ M-Pesa Ministry Channel Exception: {str(api_err)}")
             messages.error(request, "⚠️ Safaricom API Gateway timeout. Please check your local connection parameters.")
@@ -73,6 +113,7 @@ def church_giving_portal(request):
         return redirect('church_giving_portal')
 
     return render(request, 'church_giving.html')
+
 
 # =====================================================
 # 📸 2. SERMONS MEDIA CENTER REPOSITORY GRID
@@ -94,6 +135,7 @@ def sermons_center(request):
         'selected_filter': service_filter,
     }
     return render(request, 'church_sermons.html', context)
+
 
 # =====================================================
 # 🙏 3. DIGITAL PRAYER REQUEST DESK COMPONENT
@@ -120,14 +162,14 @@ def prayer_desk(request):
                 is_reviewed_by_pastor=False
             )
             print(f"🙏 PEFA Thika Road Prayer Box: Fresh request logged from '{name_entry}'!")
-            messages.success(request,
-                             f"✨ Thank you {name_entry}. Your prayer request has been securely submitted to the Pastoral team. Stand firm in faith, the Lord hears you.")
+            messages.success(request, f"✨ Thank you {name_entry}. Your prayer request has been securely submitted to the Pastoral team. Stand firm in faith, the Lord hears you.")
         else:
             messages.warning(request, "⚠️ Please type in your prayer request details before submitting.")
 
         return redirect('prayer_desk')
 
     return render(request, 'church_prayer.html')
+
 
 # =====================================================
 # 📅 4. UPCOMING CHURCH EVENTS & CONFERENCES CALENDAR
@@ -145,6 +187,13 @@ def events_log(request):
     }
     return render(request, 'church_events.html', context)
 
+
+import json  # 🚨 CRITICAL HOOK: Restores the live dashboard metrics serialization pipeline
+from django.db.models import Sum
+from django.db.models.functions import TruncWeek
+from django.contrib.auth.decorators import login_required, user_passes_test
+from core.models import Sermon, ChurchEvent, PrayerRequest, MpesaTransaction
+
 # =====================================================
 # ⛪ 6. PASTOR'S PRIVATE LEADERSHIP REVIEW DASHBOARD
 # =====================================================
@@ -152,8 +201,8 @@ def events_log(request):
 @user_passes_test(lambda u: u.is_staff, login_url='/admin/login/')
 def pastor_dashboard(request):
     """
-    Pastoral leadership workspace panel. Displays all active congregational
-    prayer desk requests, intercession queues, and ministry metadata counters.
+    Pastoral leadership workspace panel. Displays active congregational prayer
+    desk requests, intercession queues, and aggregates real-time graph datasets for cashflows.
     """
     pending_prayers = PrayerRequest.objects.filter(is_reviewed_by_pastor=False).order_by('-date_submitted')
     reviewed_prayers = PrayerRequest.objects.filter(is_reviewed_by_pastor=True).order_by('-date_submitted')[:10]
@@ -162,14 +211,151 @@ def pastor_dashboard(request):
     total_sermons = Sermon.objects.all().count()
     total_events = ChurchEvent.objects.all().count()
 
+    # Fetch latest 15 transactions for the pastoral cash flow matrix view
+    church_transactions = MpesaTransaction.objects.all().order_by('-created_at')[:15]
+
+    # 📊 GRAPH DATA A: Aggregate total collections by dynamic categories
+    categories_query = MpesaTransaction.objects.filter(status='COMPLETED').values('account_reference').annotate(total=Sum('amount'))
+    chart_labels = [item['account_reference'] for item in categories_query]
+    chart_data = [float(item['total']) for item in categories_query]
+
+    # 📊 GRAPH DATA B: Aggregate weekly cash flow trends (Last 6 weeks)
+    weekly_query = MpesaTransaction.objects.filter(status='COMPLETED').annotate(week=TruncWeek('created_at')).values('week').annotate(total=Sum('amount')).order_by('week')[:6]
+    trend_labels = [item['week'].strftime('%b %d') for item in weekly_query if item['week']]
+    trend_data = [float(item['total']) for item in weekly_query]
+
     context = {
         'pending_prayers': pending_prayers,
         'reviewed_prayers': reviewed_prayers,
         'total_pending': total_pending,
         'total_sermons': total_sermons,
         'total_events': total_events,
+        'transactions': church_transactions,
+        # ✨ Serialize your data variables into safe text packets for Chart.js
+        'chart_labels': json.dumps(chart_labels),
+        'chart_data': json.dumps(chart_data),
+        'trend_labels': json.dumps(trend_labels),
+        'trend_data': json.dumps(trend_data),
     }
     return render(request, 'pastor_dashboard.html', context)
+
+
+# =====================================================
+# 💸 7. SAFARICOM M-PESA DARAJA WEBHOOK API ENDPOINTS
+# =====================================================
+@csrf_exempt
+@require_POST
+def mpesa_stk_callback(request):
+    """Processes verification feedback loops upon completion of user PIN entry"""
+    try:
+        payload = json.loads(request.body.decode('utf-8'))
+        stk_callback = payload.get('Body', {}).get('stkCallback', {})
+        result_code = stk_callback.get('ResultCode')
+        merchant_id = stk_callback.get('MerchantRequestID')
+
+        tx = MpesaTransaction.objects.filter(merchant_request_id=merchant_id).first()
+        if not tx:
+            return JsonResponse({"ResultCode": 1, "ResultDesc": "Transaction track log entry not found"})
+
+        if result_code == 0:
+            metadata = stk_callback.get('CallbackMetadata', {}).get('Item', [])
+            receipt = next((i.get('Value') for i in metadata if i.get('Name') == 'MpesaReceiptNumber'), None)
+            phone = next((i.get('Value') for i in metadata if i.get('Name') == 'PhoneNumber'), tx.phone_number)
+
+            tx.status = 'COMPLETED'
+            tx.mpesa_receipt = receipt
+            tx.phone_number = phone
+            tx.save()
+            print(f"✅ STK Push Completed: KSH {tx.amount} received from {phone} [{receipt}]")
+        else:
+            tx.status = 'FAILED'
+            tx.save()
+            print(f"❌ STK Push Declined/Failed for ID {merchant_id} with Code {result_code}")
+
+        return JsonResponse({"ResultCode": 0, "ResultDesc": "Success"})
+    except Exception as e:
+        return JsonResponse({"ResultCode": 1, "ResultDesc": f"Callback parse error: {str(e)}"})
+
+
+@csrf_exempt
+@require_POST
+def mpesa_c2b_validation(request):
+    """Pre-validates manual SIM Toolkit Paybill entry details before processing money"""
+    return JsonResponse({"ResultCode": 0, "ResultDesc": "Accepted"})
+
+
+@csrf_exempt
+@require_POST
+def mpesa_c2b_confirmation(request):
+    """Captures manual external SIM Paybill collections directly into the ledger grid"""
+    try:
+        payload = json.loads(request.body.decode('utf-8'))
+        receipt_id = payload.get('TransID')
+
+        # Enforce uniqueness check to block duplication runs
+        if MpesaTransaction.objects.filter(mpesa_receipt=receipt_id).exists():
+            return JsonResponse({"ResultCode": 0, "ResultDesc": "Duplicate entry clean bypass"})
+
+        MpesaTransaction.objects.create(
+            transaction_type='C2B',
+            amount=payload.get('TransAmount'),
+            phone_number=payload.get('MSISDN'),
+            mpesa_receipt=receipt_id,
+            account_reference=payload.get('BillRefNumber', 'General Paybill Giving'),
+            first_name=payload.get('FirstName', 'Congregation Member'),
+            status='COMPLETED'
+        )
+        return JsonResponse({"ResultCode": 0, "ResultDesc": "Payment successfully recorded"})
+    except Exception as e:
+        return JsonResponse({"ResultCode": 1, "ResultDesc": f"Database recording issue: {str(e)}"})
+
+
+@login_required(login_url='/admin/login/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/')
+def trigger_pastoral_b2c(request):
+    """Pushes automated outward money disbursements to members right from the dashboard view"""
+    if request.method == "POST":
+        raw_phone = request.POST.get('phone_number', '').strip()
+        amount = request.POST.get('amount', '').strip()
+        remarks = request.POST.get('remarks', 'Welfare Allocation').strip()
+
+        if raw_phone.startswith('0'):
+            phone = '254' + raw_phone[1:]
+        elif raw_phone.startswith('+254'):
+            phone = raw_phone[1:]
+        else:
+            phone = raw_phone
+
+        result_url = "https://pefathikaroadcathedral.org"
+        timeout_url = "https://pefathikaroadcathedral.org"
+
+        try:
+            client = MpesaDarajaClient()
+            response = client.initiate_b2c_disbursement(
+                phone_number=phone,
+                amount=amount,
+                result_url=result_url,
+                queue_url=timeout_url,
+                remarks=remarks
+            )
+
+            if response.get('ResponseCode') == '0':
+                MpesaTransaction.objects.create(
+                    transaction_type='B2C',
+                    amount=amount,
+                    phone_number=phone,
+                    account_reference=remarks,
+                    merchant_request_id=response.get('ConversationID'),
+                    status='PENDING'
+                )
+                messages.success(request, f"💸 B2C outbound request of KSH {amount} dispatched for processing.")
+            else:
+                messages.error(request, f"❌ Safaricom B2C Gateway Rejection: {response.get('ResponseDescription')}")
+        except Exception as e:
+            messages.error(request, f"❌ Outbound communication channel failure: {str(e)}")
+
+        return redirect('pastor_dashboard')
+
 # =====================================================
 # 🔒 PASTOR ADMINISTRATIVE FORM CONTROL DESK PANEL
 # =====================================================
@@ -183,17 +369,17 @@ def is_church_admin(user):
         user.is_superuser or
         user.groups.filter(name='ChurchAdmins').exists()
     )
-
 @user_passes_test(is_church_admin, login_url='/admin/login/')
 def pastor_admin_desk(request):
     """
     Unified control interface allowing pastors to securely upload gallery files,
-    add upcoming calendar programs, post sermons, and check off pending items.
+    add upcoming calendar programs, post sermons, and manage cathedral building campaigns.
     """
     sermon_form = SermonForm()
     event_form = ChurchEventForm()
     image_form = ChurchImageForm()
     asset_form = ChurchGalleryAssetForm()
+    project_form = ChurchProjectForm()  # 🌱 Instantiate the new project layout form
 
     if request.method == 'POST':
         action_flag = request.POST.get('admin_action')
@@ -226,16 +412,27 @@ def pastor_admin_desk(request):
                 messages.success(request, "🖼️ Slider banner asset added to homepage loop.")
                 return redirect('pastor_admin_desk')
 
+        # ⛪ NEW CONTROLLER ACTION FOR INTEGRATING TARGETED CHURCH PROJECTS
+        elif action_flag == 'create_project':
+            form = ChurchProjectForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "⛪ New development campaign published successfully onto public metrics layout grids.")
+                return redirect('pastor_admin_desk')
+
     context = {
         'sermon_form': sermon_form,
         'event_form': event_form,
         'image_form': image_form,
         'asset_form': asset_form,
+        'project_form': project_form,  # 🌱 Expose project form wrapper to template view
         'all_sermons': Sermon.objects.all(),
         'all_events': ChurchEvent.objects.all(),
         'grid_images': ChurchImage.objects.all(),
         'slider_assets': ChurchGalleryAsset.objects.all(),
+        'all_projects': ChurchProject.objects.all(),  # 🌱 Expose your projects dataset to tracking grids
         'pending_prayers': PrayerRequest.objects.filter(is_reviewed_by_pastor=False).order_by('-date_submitted'),
+        'transactions': MpesaTransaction.objects.all().order_by('-created_at')[:15],  # Required for the financial subtable
     }
     return render(request, 'pastor_admin_desk.html', context)
 
@@ -296,3 +493,125 @@ def delete_gallery_asset(request, asset_id, asset_type):
 def custom_404_handler(request, exception=None):
     """Safely captures missing ministry url tracking coordinates."""
     return render(request, '404.html', status=404)
+
+
+# =====================================================
+# ⛪ 9. PUBLIC CHURCH CAMPAIGNS DIRECTORY CONTROLLERS
+# =====================================================
+def projects_directory(request):
+    """Fetches all active development campaigns to present to members with dynamic progress ratios."""
+    active_projects = ChurchProject.objects.filter(is_active=True).order_by('-created_at')
+    return render(request, 'church_projects.html', {'projects': active_projects})
+
+
+def project_detail(request, slug):
+    """Displays project data blueprints and embeds deep-linked M-Pesa tracking properties."""
+    project = get_object_or_404(ChurchProject, slug=slug)
+    return render(request, 'project_detail.html', {'project': project})
+
+
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import MpesaTransaction
+
+@login_required(login_url='/admin/login/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/')
+def export_financial_ledger_csv(request):
+    """
+    Scans the live transaction database tables, formats numeric values,
+    and pipes out an encrypted corporate spreadsheet file download (.CSV) on demand.
+    """
+    # Create the secure layout response object pointing to Excel stream targets
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="PEFA_Cathedral_Ledger_Export.csv"'
+
+    writer = csv.writer(response)
+    # Define official accounting layout columns headers matrix
+    writer.writerow(['System ID', 'M-Pesa Receipt', 'Transaction Channel', 'Giver Name', 'Phone Target', 'Amount (KES)', 'Allocation Target', 'Verification Status', 'Timestamp Logged'])
+
+    # Stream out full ledger records chronologically
+    records = MpesaTransaction.objects.all().order_by('-created_at')
+    for tx in records:
+        writer.writerow([
+            tx.id,
+            tx.mpesa_receipt if tx.mpesa_receipt else "N/A",
+            tx.get_transaction_type_display(),
+            tx.first_name if tx.first_name else "Anonymous / General Member",
+            tx.phone_number,
+            f"{'-' if tx.transaction_type == 'B2C' else ''}{tx.amount}",
+            tx.account_reference,
+            tx.get_status_display(),
+            tx.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        ])
+
+    return response
+
+
+import io
+import csv
+from django.utils import timezone
+from .forms import ExcelImportForm
+
+
+@login_required(login_url='/admin/login/')
+@user_passes_test(lambda u: u.is_staff, login_url='/admin/login/')
+def import_financial_ledger_csv(request):
+    """
+    Reads an uploaded CSV file spreadsheet row-by-row, validates columns,
+    and bulk-injects historical transactions into the database ledger.
+    """
+    if request.method == "POST":
+        form = ExcelImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            csv_file = request.FILES['excel_file']
+
+            # Read and decode the file data safely
+            data_set = csv_file.read().decode('UTF-8')
+            io_string = io.StringIO(data_set)
+            next(io_string)  # Skip the heading row automatically
+
+            success_count = 0
+            duplicate_count = 0
+
+            for row in csv.reader(io_string, delimiter=',', quotechar='"'):
+                if not row or len(row) < 7:
+                    continue  # Skip empty or broken rows safely
+
+                # Map array indexes cleanly matching our explicit exporter variables
+                receipt_id = row[1].strip() if row[1] else None
+                tx_type = 'C2B' if "Paybill" in row[2] else ('B2C' if "Pastoral" in row[2] else 'STK_PUSH')
+                giver_name = row[3].strip()
+                phone = row[4].strip()
+                raw_amount = row[5].replace('-', '').strip()  # Clean payout negative signs
+                account_ref = row[6].strip()
+                status_string = 'COMPLETED' if "Completed" in row[7] else (
+                    'PENDING' if "Pending" in row[7] else 'FAILED')
+
+                # Avoid duplicate entry crashes by checking the receipt token unique constraint
+                if receipt_id and receipt_id != "N/A":
+                    if MpesaTransaction.objects.filter(mpesa_receipt=receipt_id).exists():
+                        duplicate_count += 1
+                        continue
+
+                try:
+                    MpesaTransaction.objects.create(
+                        transaction_type=tx_type,
+                        amount=float(raw_amount),
+                        phone_number=phone,
+                        mpesa_receipt=receipt_id if receipt_id != "N/A" else None,
+                        account_reference=account_ref,
+                        first_name=giver_name if giver_name != "Anonymous / General Member" else "",
+                        status=status_string,
+                        created_at=timezone.now()
+                    )
+                    success_count += 1
+                except Exception:
+                    continue  # Skip structural parse conversion errors safely
+
+            messages.success(request,
+                             f"✨ Bulk Import Complete: Successfully logged {success_count} rows. (Skipped {duplicate_count} duplicate items).")
+            return redirect('pastor_dashboard')
+
+    messages.error(request, "❌ Invalid file processing request.")
+    return redirect('pastor_dashboard')

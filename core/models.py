@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # =====================================================
@@ -65,7 +66,7 @@ class PrayerRequest(models.Model):
 
 
 # =====================================================
-# 📸 4. SANCTUARY MEDIA GALLERY IMAGES (NEW)
+# 📸 4. SANCTUARY MEDIA GALLERY IMAGES
 # =====================================================
 class ChurchImage(models.Model):
     title = models.CharField(max_length=150, help_text="e.g. Sunday Main Praise Team Worship")
@@ -91,3 +92,87 @@ class ChurchGalleryAsset(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# =====================================================
+# 💸 5. ONLINE M-PESA FINANCIAL TRANSACTION LEDGER
+# =====================================================
+class MpesaTransaction(models.Model):
+    TRANSACTION_TYPES = [
+        ('STK_PUSH', 'Lipa Na M-Pesa Online (STK)'),
+        ('C2B', 'Paybill Manual SIM Toolkit Entry'),
+        ('B2C', 'Pastoral Welfare / Disbursement Outward'),
+    ]
+
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending Implementation'),
+        ('COMPLETED', 'Completed Glory Payment'),
+        ('FAILED', 'Failed / Cancelled / Insufficient'),
+    ]
+
+    transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPES)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    phone_number = models.CharField(max_length=15)
+    mpesa_receipt = models.CharField(max_length=50, unique=True, null=True, blank=True)
+    merchant_request_id = models.CharField(max_length=100, null=True, blank=True, db_index=True)
+    checkout_request_id = models.CharField(max_length=100, null=True, blank=True, db_index=True)
+    account_reference = models.CharField(max_length=100, help_text="e.g., Tithe, Building Fund, Welfare Remarks")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.get_transaction_type_display()} — KSH {self.amount} ({self.status})"
+
+
+# =====================================================
+# ⛪ 6. CHURCH VISION PROJECTS & TARGETED FUNDING
+# =====================================================
+class ChurchProject(models.Model):
+    title = models.CharField(max_length=255, help_text="e.g., Sanctuary Roofing Extension Phase 2")
+    slug = models.SlugField(max_length=255, unique=True, blank=True, help_text="Auto-generated url identifier token.")
+    description = models.TextField(help_text="Detailed description of the vision and why the cathedral needs it.")
+    target_amount = models.DecimalField(max_digits=12, decimal_places=2, help_text="Total budget goal in KES.")
+    cover_image = models.ImageField(upload_to='projects/covers/', help_text="Upload high-res architecture design or site snapshot.")
+    is_active = models.BooleanField(default=True, help_text="Uncheck to archive completed or paused projects.")
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.title} (Goal: KES {self.target_amount})"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    @property
+    def total_raised(self):
+        """
+        Dynamically calculates all successful M-Pesa seeds contributed
+        towards this specific project reference from your transaction history ledger.
+        """
+        from django.db.models import Sum
+        # Matches against account_reference using the project's unique system title
+        aggregate = MpesaTransaction.objects.filter(
+            account_reference=self.title,
+            status='COMPLETED'
+        ).aggregate(total=Sum('amount'))
+        return aggregate['total'] or 0.00
+
+    @property
+    def progress_percentage(self):
+        """Calculates visual percentage caps for fluid UI bar scales."""
+        if self.target_amount <= 0:
+            return 0
+        percentage = (float(self.total_raised) / float(self.target_amount)) * 100
+        return min(round(percentage, 1), 100.0) # Caps visually at 100%
+
+

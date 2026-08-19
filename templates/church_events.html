@@ -1,6 +1,6 @@
 {% extends 'church_base.html' %}
 
-{% block title %}Upcoming Events &amp; Conferences | PEFA Thika Road Sanctuary{% endblock %}
+{% block title %}Upcoming Events &amp; Conferences | PEFA Thika Road Cathedral{% endblock %}
 
 {% block content %}
 
@@ -8,28 +8,28 @@
 
     <!-- Header Hero Section Layout Box -->
     <div style="text-align: center; margin-bottom: 3.5rem;">
-        <span style="font-size: 0.75rem; font-weight: 800; color: #eab308; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Kingdom Calendar</span>
-        <h1 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; margin: 0 0 0.5rem 0;">Upcoming Conferences &amp; Ministry Events</h1>
+        <span style="font-size: 0.75rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Kingdom Calendar</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: #0b1329; letter-spacing: -0.03em; margin: 0 0 0.5rem 0;">Upcoming Conferences &amp; Ministry Events</h1>
         <p style="font-size: 0.95rem; color: #64748b; max-width: 520px; margin: 0 auto; font-weight: 500; line-height: 1.5;">
-            Mark your calendar and prepare your heart for our upcoming prophetic conferences, breakthrough revival assemblies, and specialized department fellowships.
+            Mark your calendar and prepare your heart for our upcoming prophetic conferences, breakthrough revival assemblies, and specialized cathedral department fellowships.
         </p>
     </div>
 
     <!-- ⚡ HIGH-CONTRAST CHRONOLOGICAL EVENTS STACK MATRIX -->
     <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto;" class="mobile-events-stack">
         {% for event in events %}
-            <div class="sanctuary-card" style="padding: 0; overflow: hidden; display: grid; grid-template-columns: 200px 1fr; border-left: 5px solid #eab308; margin-bottom: 0;">
+            <div class="sanctuary-card" style="padding: 0; overflow: hidden; display: grid; grid-template-columns: 200px 1fr; border-left: 5px solid #dfb15b; margin-bottom: 0;">
 
                 <!-- Left Chronological Date Accent Block Panel -->
-                <div style="background-color: #0f172a; color: #ffffff; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-                    <span style="font-size: 2.25rem; font-weight: 800; color: #eab308; line-height: 1; letter-spacing: -0.02em;">{{ event.date|date:"d" }}</span>
-                    <span style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; color: #cbd5e1;">{{ event.date|date:"M Y" }}</span>
+                <div class="date-panel-wrapper" style="background-color: #0b1329; color: #ffffff; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                    <span class="day-text-node" style="font-size: 2.25rem; font-weight: 800; color: #dfb15b; line-height: 1; letter-spacing: -0.02em;">{{ event.date|date:"d" }}</span>
+                    <span class="month-text-node" style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; color: #cbd5e1;">{{ event.date|date:"M Y" }}</span>
                 </div>
 
                 <!-- Right Information Metadata Content Panel -->
                 <div style="padding: 2rem; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
                     <div>
-                        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">{{ event.title }}</h3>
+                        <h3 style="margin: 0 0 0.4rem 0; font-size: 1.25rem; font-weight: 800; color: #0b1329; letter-spacing: -0.02em;">{{ event.title }}</h3>
                         <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.75rem;">{{ event.description }}</p>
                     </div>
 
@@ -57,15 +57,20 @@
         .mobile-events-stack .sanctuary-card {
             grid-template-columns: 1fr !important;
             border-left: none !important;
-            border-top: 5px solid #eab308 !important;
+            border-top: 5px solid #dfb15b !important;
         }
-        .mobile-events-stack div[style*="background-color: #0f172a"] {
+        /* Safely target structural styles dynamically without relying on absolute matching strings */
+        .mobile-events-stack .date-panel-wrapper {
             padding: 1.25rem !important;
             flex-direction: row !important;
             gap: 0.5rem !important;
+            justify-content: center !important;
         }
-        .mobile-events-stack span[style*="font-size: 2.25rem"] {
+        .mobile-events-stack .day-text-node {
             font-size: 1.5rem !important;
+        }
+        .mobile-events-stack .month-text-node {
+            margin-top: 0 !important;
         }
     }
 </style>

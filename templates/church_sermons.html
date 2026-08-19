@@ -1,43 +1,43 @@
 {% extends 'church_base.html' %}
 
-{% block title %}Sermons Media Center | PEFA Thika Road Sanctuary{% endblock %}
+{% block title %}Sermons Media Center | PEFA Thika Road Cathedral{% endblock %}
 
 {% block content %}
 
 <div class="container">
-    
+
     <!-- Header Hero Symmetrical Typography Layout Block -->
     <div style="text-align: center; margin-bottom: 3.5rem;">
-        <span style="font-size: 0.75rem; font-weight: 800; color: #eab308; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Word &amp; Power Library</span>
-        <h1 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; letter-spacing: -0.03em; margin: 0 0 0.5rem 0;">Recorded Sermons Catalogue</h1>
+        <span style="font-size: 0.75rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Word &amp; Power Library</span>
+        <h1 style="font-size: 1.85rem; font-weight: 800; color: #0b1329; letter-spacing: -0.03em; margin: 0 0 0.5rem 0;">Recorded Sermons Catalogue</h1>
         <p style="font-size: 0.95rem; color: #64748b; max-width: 520px; margin: 0 auto; font-weight: 500; line-height: 1.5;">
-            Catch up on powerful Sunday declarations, prophetic messages, and deep mid-week bibical teachings preached live at the altar.
+            Catch up on powerful Sunday declarations, prophetic messages, and deep mid-week biblical teachings preached live at the altar.
         </p>
     </div>
 
     <!-- 🚥 SERVICE FILTER CHANNELS BAR -->
     <div style="display: flex; gap: 0.75rem; justify-content: center; align-items: center; margin-bottom: 3rem; flex-wrap: wrap;" class="mobile-filter-bar">
-        <a href="{% url 'sermons_center' %}" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 8px; text-decoration: none; border: 1px solid #e2e8f0; {% if not selected_filter %}background-color: #0f172a; color: #ffffff; border-color: #0f172a;{% else %}background-color: #ffffff; color: #475569;{% endif %}">🔥 All Messages</a>
-        <a href="{% url 'sermons_center' %}?service_type=SUNDAY" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 8px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'SUNDAY' %}background-color: #0f172a; color: #ffffff; border-color: #0f172a;{% else %}background-color: #ffffff; color: #475569;{% endif %}">⛪ Sunday Main</a>
-        <a href="{% url 'sermons_center' %}?service_type=MIDWEEK" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 8px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'MIDWEEK' %}background-color: #0f172a; color: #ffffff; border-color: #0f172a;{% else %}background-color: #ffffff; color: #475569;{% endif %}">📖 Mid-Week</a>
-        <a href="{% url 'sermons_center' %}?service_type=YOUTH" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 8px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'YOUTH' %}background-color: #0f172a; color: #ffffff; border-color: #0f172a;{% else %}background-color: #ffffff; color: #475569;{% endif %}">⚡ Youth Blast</a>
+        <a href="{% url 'sermons_center' %}" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 4px; text-decoration: none; border: 1px solid #e2e8f0; {% if not selected_filter %}background-color: #0b1329; color: #ffffff; border-color: #0b1329;{% else %}background-color: #ffffff; color: #475569;{% endif %}">🔥 All Messages</a>
+        <a href="{% url 'sermons_center' %}?service_type=SUNDAY" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 4px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'SUNDAY' %}background-color: #0b1329; color: #ffffff; border-color: #0b1329;{% else %}background-color: #ffffff; color: #475569;{% endif %}">⛪ Sunday Main</a>
+        <a href="{% url 'sermons_center' %}?service_type=MIDWEEK" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 4px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'MIDWEEK' %}background-color: #0b1329; color: #ffffff; border-color: #0b1329;{% else %}background-color: #ffffff; color: #475569;{% endif %}">📖 Mid-Week</a>
+        <a href="{% url 'sermons_center' %}?service_type=YOUTH" style="padding: 0.5rem 1.15rem; font-size: 0.82rem; font-weight: 700; border-radius: 4px; text-decoration: none; border: 1px solid #e2e8f0; {% if selected_filter == 'YOUTH' %}background-color: #0b1329; color: #ffffff; border-color: #0b1329;{% else %}background-color: #ffffff; color: #475569;{% endif %}">⚡ Youth Blast</a>
     </div>
 
-    <!-- ⚡ AXIS ASSETS INSPIRED HIGH-FIDELITY MEDIA CARD GRID GRID -->
+    <!-- ⚡ AXIS ASSETS INSPIRED HIGH-FIDELITY MEDIA CARD GRID -->
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 2rem;" class="sermon-media-grid">
         {% for sermon in sermons %}
-            <div class="sanctuary-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
-                
+            <div class="sanctuary-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0;">
+
                 <!-- 📹 Top Aspect Framed Placeholder Graphics Banner Wrapper -->
-                <div style="position: relative; width: 100%; height: 175px; background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center;">
-                    <span style="position: absolute; top: 12px; left: 12px; background-color: rgba(15, 23, 42, 0.75); color: #eab308; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
+                <div style="position: relative; width: 100%; height: 175px; background: linear-gradient(135deg, #1e3a8a 0%, #0b1329 100%); display: flex; align-items: center; justify-content: center;">
+                    <span style="position: absolute; top: 12px; left: 12px; background-color: rgba(11, 19, 41, 0.85); color: #dfb15b; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.3rem 0.65rem; border-radius: 4px; backdrop-filter: blur(4px);">
                         {{ sermon.get_service_type_display }}
                     </span>
-                    
+
                     <!-- Centered Glowing Play Icon Visual Anchor SVG -->
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org" style="filter: drop-shadow(0 4px 12px rgba(234,179,8,0.2));">
-                        <circle cx="12" cy="12" r="10" fill="#eab308"/>
-                        <path d="M10 8L16 12L10 16V8Z" fill="#0f172a"/>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org" style="filter: drop-shadow(0 4px 12px rgba(223,177,91,0.25));">
+                        <circle cx="12" cy="12" r="10" fill="#dfb15b"/>
+                        <path d="M10 8L16 12L10 16V8Z" fill="#0b1329"/>
                     </svg>
                 </div>
 
@@ -45,17 +45,17 @@
                 <div style="padding: 1.5rem; text-align: left; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 1.25rem;">
                     <div>
                         <span style="font-size: 0.75rem; color: #64748b; font-weight: 700; display: block; margin-bottom: 0.25rem;">🗓️ {{ sermon.date_preached|date:"d M Y" }}</span>
-                        <h3 style="margin: 0 0 0.35rem 0; font-size: 1.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; line-height: 1.3;">{{ sermon.title }}</h3>
+                        <h3 style="margin: 0 0 0.35rem 0; font-size: 1.1rem; font-weight: 800; color: #0b1329; letter-spacing: -0.02em; line-height: 1.3;">{{ sermon.title }}</h3>
                         <span style="font-size: 0.85rem; color: #1e3a8a; font-weight: 700; display: block; margin-bottom: 0.75rem;">🎤 Preacher: {{ sermon.preacher }}</span>
                         <p style="font-size: 0.85rem; color: #475569; font-weight: 500; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ sermon.summary }}</p>
                     </div>
 
                     <div style="border-top: 1px solid #f1f5f9; padding-top: 1rem; display: flex; gap: 0.5rem; width: 100%;">
                         {% if sermon.youtube_url %}
-                            <a href="{{ sermon.youtube_url }}" target="_blank" class="btn-kingdom" style="font-size: 0.82rem; padding: 0.6rem 1rem; border-radius: 6px; background-color: #dc2626; box-shadow: none;">📺 Watch Video</a>
+                            <a href="{{ sermon.youtube_url }}" target="_blank" class="btn-kingdom" style="font-size: 0.82rem; padding: 0.6rem 1rem; border-radius: 4px; background-color: #dc2626; box-shadow: none; color: #ffffff; text-decoration: none; text-align: center; width: 100%;">📺 Watch Video</a>
                         {% endif %}
                         {% if sermon.audio_file %}
-                            <a href="{{ sermon.audio_file.url }}" download class="btn-kingdom" style="font-size: 0.82rem; padding: 0.6rem 1rem; border-radius: 6px; background-color: #0f172a; box-shadow: none;">🎵 Audio MP3</a>
+                            <a href="{{ sermon.audio_file.url }}" download class="btn-kingdom" style="font-size: 0.82rem; padding: 0.6rem 1rem; border-radius: 4px; background-color: #0b1329; box-shadow: none; color: #ffffff; text-decoration: none; text-align: center; width: 100%;">🎵 Audio MP3</a>
                         {% endif %}
                     </div>
                 </div>
@@ -72,7 +72,7 @@
 
 </div>
 
-<!-- 📱 SMARTPHONE COMPACT SCREEN MEDIA MEDIA ADAPTERS -->
+<!-- 📱 SMARTPHONE COMPACT SCREEN MEDIA ADAPTERS -->
 <style>
     @media (max-width: 640px) {
         .mobile-filter-bar {

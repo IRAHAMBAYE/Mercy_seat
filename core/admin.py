@@ -1,6 +1,6 @@
 from django.contrib import admin
-# 🚨 ACCENT IMPORT HOOK: Added ChurchImage to the list here to kill the NameError crash!
-from .models import Sermon, ChurchEvent, PrayerRequest, ChurchImage
+# 🚨 ACCENT IMPORT HOOK: Updated to include newly launched models to kill any missing compilation NameErrors!
+from .models import Sermon, ChurchEvent, PrayerRequest, ChurchImage, ChurchGalleryAsset, MpesaTransaction, ChurchProject
 
 # =====================================================
 # 📸 1. SERMONS CATALOGUE MANAGEMENT BOARD
@@ -54,3 +54,39 @@ class ChurchImageAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_uploaded')
     search_fields = ('title',)
     ordering = ('-date_uploaded',)
+
+
+@admin.register(ChurchGalleryAsset)
+class ChurchGalleryAssetAdmin(admin.ModelAdmin):
+    list_display = ('title', 'uploaded_at')
+    search_fields = ('title',)
+    ordering = ('-uploaded_at',)
+
+
+# =====================================================
+# 💸 5. ONLINE M-PESA REVENUE & AUDITING REPOSITORY
+# =====================================================
+@admin.register(MpesaTransaction)
+class MpesaTransactionAdmin(admin.ModelAdmin):
+    # Displays clear reference data directly across columns for instant auditing
+    list_display = ('mpesa_receipt', 'first_name', 'phone_number', 'transaction_type', 'amount', 'account_reference', 'status', 'created_at')
+    # Filters transactions instantly by success type or transaction method
+    list_filter = ('transaction_type', 'status', 'created_at', 'account_reference')
+    # Search instantly by receipt strings, names, or reference tags
+    search_fields = ('mpesa_receipt', 'merchant_request_id', 'checkout_request_id', 'phone_number', 'first_name', 'account_reference')
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at', 'updated_at')
+
+
+# =====================================================
+# ⛪ 6. CATHEDRAL VISION PROJECTS MANAGEMENT BOARD
+# =====================================================
+@admin.register(ChurchProject)
+class ChurchProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'target_amount', 'is_active', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('title', 'description')
+    ordering = ('-created_at',)
+    # Allows pastors to toggle active status checkboxes straight from the grid row items lists
+    list_editable = ('is_active',)
+    prepopulated_fields = {'slug': ('title',)}
