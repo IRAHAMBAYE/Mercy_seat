@@ -19,8 +19,10 @@ ALLOWED_HOSTS = ['*']
 
 # Add this setting near your ALLOWED_HOSTS configuration
 CSRF_TRUSTED_ORIGINS = [
-    'https://pefathikaroadcathedral-production-c4e2f9.up.railway.app',
+    "https://pefachuch-production-f6d3c.up.railway.app",
+    "https://*.railway.app",
 ]
+
 
 
 # Application definition
