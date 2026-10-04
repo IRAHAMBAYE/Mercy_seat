@@ -2,55 +2,58 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 1rem;">
 
-    <!-- ⛪ PREMIUM HERO BRANDING & AUTOMATED SLIDER AREA -->
-    <div class="sanctuary-card" style="padding: 3.5rem 2.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; border: none; margin-bottom: 3rem; position: relative; overflow: hidden;">
+    <!-- ⛪ CLEAN SEAMLESS SACRED MINIMALIST HERO ANCHOR -->
+    <div class="sanctuary-card" style="padding: 4.5rem 2rem; background: #ffffff; border: 1px solid rgba(30, 41, 59, 0.08); border-radius: 12px; margin-bottom: 3.5rem; text-align: center; box-shadow: 0 20px 40px -25px rgba(15, 23, 42, 0.05); position: relative; overflow: hidden;">
 
-        <!-- CSS Grid layout splitting the Hero Card into 2 columns on desktop screens -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; align-items: center; position: relative; z-index: 10;">
+        <!-- Elegant Top Subtle Brand Token -->
+        <span style="font-size: 0.72rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.15em; display: inline-block; margin-bottom: 1.25rem; background-color: rgba(153, 27, 27, 0.05); padding: 0.4rem 1rem; border-radius: 30px;">
+            A Sanctuary of Divine Transformation
+        </span>
 
-            <!-- Column 1: Welcome text contents, description, and action navigation links -->
-            <div style="text-align: left; max-width: 580px;">
-                <span style="font-size: 0.78rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Welcome to the House of Praise &amp; Transformation</span>
-                <h1 style="font-size: 2.35rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.2; margin: 0 0 1rem 0; color: #ffffff; text-transform: uppercase;">MERCY SEAT TRANSFORMATIONAL MINISTRIES</h1>
-                <p style="font-size: 1rem; color: #cbd5e1; font-weight: 500; line-height: 1.6; margin-bottom: 2.25rem;">
-                    A vibrant multi-generational community of believers celebrating Christ, growing together in the word, and transforming our generation.
-                </p>
+        <!-- Symmetrical Center Typography Architecture Layout -->
+        <h1 style="font-size: 2.85rem; font-weight: 950; letter-spacing: -0.05em; line-height: 1.15; margin: 0 auto 1.5rem auto; color: #0f172a; max-width: 720px; text-transform: uppercase;">
+            MERCY SEAT TRANSFORMATIONAL MINISTRIES
+        </h1>
 
-                <div style="display: flex; gap: 0.75rem; justify-content: flex-start; flex-wrap: wrap;">
-                    <a href="{% url 'church_giving_portal' %}" class="btn-kingdom" style="background-color: #991b1b; color: #ffffff; width: auto; padding: 0.85rem 1.75rem; box-shadow: 0 6px 15px -5px rgba(153, 27, 27, 0.4);">💸 Support Ministry Giving</a>
-                    <a href="{% url 'prayer_desk' %}" class="btn-kingdom" style="background-color: transparent; border: 2px solid #cbd5e1; color: #ffffff; width: auto; padding: 0.80rem 1.75rem;">🙏 Submit Prayer Need</a>
-                </div>
-            </div>
+        <p style="font-size: 1.05rem; color: #475569; font-weight: 500; line-height: 1.65; max-width: 620px; margin: 0 auto 2.5rem auto;">
+            We welcome you to a multi-generational global fellowship anchored on celebrating Christ Jesus, cultivating robust spiritual growth, and impacting our world through truth.
+        </p>
 
-            <!-- Column 2: Seamlessly scrolling dynamic church activity photo showcase slider -->
-            <div style="width: 100%; max-width: 500px; height: 320px; overflow: hidden; border-radius: 12px; border: 3px solid rgba(255,255,255,0.15); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); position: relative; margin: 0 auto;">
+        <!-- Centered Core Action Hub Layout Elements -->
+        <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 3.5rem;">
+            <a href="{% url 'church_giving_portal' %}" class="btn-kingdom" style="background-color: #991b1b; color: #ffffff; width: auto; padding: 1rem 2rem; border-radius: 6px; font-size: 0.85rem; box-shadow: 0 10px 25px -10px rgba(153, 27, 27, 0.4);">
+                💸 Support Ministry Giving
+            </a>
+            <a href="{% url 'prayer_desk' %}" class="btn-kingdom" style="background-color: #0f172a; color: #ffffff; width: auto; padding: 1rem 2rem; border-radius: 6px; font-size: 0.85rem; box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.2);">
+                🙏 Submit Prayer Request
+            </a>
+        </div>
 
-                <!-- Infinite horizontal animation wrapper displaying current backend dynamic photos -->
-                <div style="display: flex; width: 400%; height: 100%; animation: churchHeroSlider 16s ease-in-out infinite;">
-                    {% for asset in church_gallery|slice:":4" %}
-                        <div style="width: 25%; height: 100%; position: relative; flex-shrink: 0;">
-                            <img src="{{ asset.image.url }}" alt="{{ asset.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15, 23, 42, 0.9)); padding: 2rem 1.25rem 1rem; font-size: 0.88rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">
-                                📸 {{ asset.title }}
-                            </div>
+        <!-- 📸 IMMERSIVE CONTINUOUS HORIZONTAL IMAGE CAROUSEL BASE -->
+        <div style="width: 100%; max-width: 820px; height: 380px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(30, 41, 59, 0.08); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.06); position: relative; margin: 0 auto;">
+            <div style="display: flex; width: 400%; height: 100%; animation: churchHeroSlider 20s ease-in-out infinite;">
+                {% for asset in church_gallery|slice:":4" %}
+                    <div style="width: 25%; height: 100%; position: relative; flex-shrink: 0;">
+                        <img src="{{ asset.image.url }}" alt="{{ asset.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15, 23, 42, 0.95)); padding: 2.5rem 2rem 1.5rem; font-size: 0.92rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em; text-align: left;">
+                            📸 {{ asset.title }}
                         </div>
-                    {% empty %}
-                        <!-- Fallback slider graphic states in case your model database loops empty -->
-                        <div style="width: 25%; height: 100%; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; flex-shrink: 0;">
-                            <div style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500;">🌟 Mercy Seat Sanctuary Life Moving Gallery</div>
+                    </div>
+                {% empty %}
+                    <div style="width: 25%; height: 100%; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; flex-shrink: 0;">
+                        <div style="color: #94a3b8; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase;">
+                            🌟 Sanctuary Sanctuary Life Moving Gallery
                         </div>
-                    {% endfor %}
-                </div>
-
+                    </div>
+                {% endfor %}
             </div>
-
         </div>
 
     </div>
 
-    <!-- Inline Animation Layout Variables for Column 2 Slider -->
+    <!-- Layout Keyframe Variables For Image Animation Module -->
     <style>
         @keyframes churchHeroSlider {
             0%, 20%   { transform: translateX(0%); }
@@ -61,26 +64,27 @@
         }
     </style>
 
-    <!-- ⚡ ACTION HIGHLIGHT MATRIX SPACING GRID -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 1.5rem;">
-
-        <!-- Worship Service Hours Location Info Card -->
-        <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;">
+    <!-- ⚡ SYMMETRICAL DUAL MEDIA CONTAINER INTERACTION GRID -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 2rem;">
+        <!-- Column 1: Clean Focal Unified Sunday Worship Notification Area -->
+        <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; border-top: 4px solid #991b1b; padding: 2.5rem 2rem; margin-bottom: 0; background-color: #ffffff;">
             <div>
-                <span style="font-size: 1.75rem; display: block; margin-bottom: 0.5rem;">🗓️</span>
-                <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; letter-spacing: -0.02em; margin-bottom: 0.5rem;">Weekly Service Schedule</h3>
-                <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.5rem;">👉 **Sunday Main Worship:** 9:00 AM — 12:30 PM</p>
-                <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.5rem;">👉 **Mon-Fri Revival Services:** 5:30 PM — 7:00 PM</p>
-                <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5;">👉 **Saturday Crusade:** 4:00 PM — 6:00 PM</p>
+                <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem; line-height: 1;">🗓️</span>
+                <h3 style="font-size: 1.35rem; font-weight: 900; color: #0f172a; letter-spacing: -0.02em; margin-bottom: 0.75rem;">Lord's Day Service</h3>
+                <p style="font-size: 0.95rem; color: #475569; font-weight: 600; line-height: 1.6; margin-bottom: 0.5rem;">Join us every single week for our main congregational worship service:</p>
+                <div style="background-color: #f1f5f9; padding: 1rem 1.25rem; border-radius: 6px; border-left: 3px solid #991b1b; margin-top: 1rem;">
+                    <strong style="color: #0f172a; font-size: 1rem; display: block; margin-bottom: 0.25rem;">✨ Sunday Celebration Service</strong>
+                    <span style="color: #475569; font-size: 0.88rem; font-weight: 700;">🕒 9:00 AM — 12:30 PM</span>
+                </div>
             </div>
-            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; background-color: #f1f5f9; padding: 0.6rem 1rem; border-radius: 4px; border: 1px solid rgba(30, 41, 59, 0.08);">
-                📍 Location: Main Sanctuary Auditorium
+            <div style="font-size: 0.8rem; color: #475569; font-weight: 700; background-color: #f8fafc; padding: 0.75rem 1rem; border-radius: 4px; border: 1px solid rgba(30, 41, 59, 0.06); display: flex; align-items: center; gap: 0.5rem;">
+                📍 <span>Location: Main Sanctuary Auditorium</span>
             </div>
         </div>
-        <!-- Latest Altar Sermon Highlight / YouTube Live Responsive Embed Card -->
-        <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; padding: 0; overflow: hidden;">
+
+        <!-- Column 2: Live Sermon Streaming Presentation Interface Desk -->
+        <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 0; padding: 0; overflow: hidden; border: 1px solid rgba(30, 41, 59, 0.08); margin-bottom: 0; background-color: #ffffff;">
             {% if youtube_video_id %}
-                <!-- 📺 16:9 PROPORTION RESPONSIVE IFRAME VIDEO PLAYER WRAPPER -->
                 <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background-color: #0f172a;">
                     <iframe src="https://youtube.com{{ youtube_video_id }}"
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
@@ -88,60 +92,53 @@
                             allowfullscreen>
                     </iframe>
                 </div>
-
-                <div style="padding: 1.5rem; border-top: 3px solid #991b1b;">
-                    <span style="font-size: 0.68rem; font-weight: 800; color: #15803d; background-color: #dcfce7; padding: 0.25rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.5rem;">
-                        📡 Live / Recorded Altar Broadcast
-                    </span>
-                    <h4 style="margin: 0 0 0.25rem 0; font-size: 1.05rem; font-weight: 800; color: #1e293b; letter-spacing: -0.01em;">{{ featured_sermon.title }}</h4>
-                    <p style="margin: 0 0 1rem 0; font-size: 0.82rem; color: #64748b; font-weight: 700;">Preached By: {{ featured_sermon.preacher }}</p>
-                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; border-radius: 4px; background-color: #0f172a; color: #ffffff; display: inline-block; text-align: center; text-decoration: none;">
-                        📸 Explore Archive Library
+                <div style="padding: 1.5rem; border-top: 3px solid #991b1b; background-color: #ffffff; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <span style="font-size: 0.68rem; font-weight: 900; color: #15803d; background-color: #dcfce7; padding: 0.25rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.5rem;">
+                            📡 Altar Broadcast Live
+                        </span>
+                        <h4 style="margin: 0 0 0.25rem 0; font-size: 1.05rem; font-weight: 800; color: #0f172a;">{{ featured_sermon.title }}</h4>
+                        <p style="margin: 0; font-size: 0.82rem; color: #64748b; font-weight: 600;">Preached By: {{ featured_sermon.preacher }}</p>
+                    </div>
+                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="padding: 0.6rem 1.25rem; font-size: 0.82rem; border-radius: 4px; background-color: #0f172a; color: #ffffff; display: inline-block; text-align: center; text-decoration: none; margin-top: 1rem;">
+                         Explore Archive Library
                     </a>
                 </div>
             {% else %}
-                <!-- 🛑 OFFLINE STATE FALLBACK GRAPHIC CONTEXT -->
-                <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 3.5rem 2rem; text-align: center; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; flex-grow: 1;">
+                <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 3.5rem 2rem; text-align: center; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; flex-grow: 1; height: 100%;">
                     <span style="font-size: 2.5rem; line-height: 1;">📡</span>
                     <div>
-                        <strong style="font-size: 1.1rem; font-weight: 800; color: #ffffff; display: block; letter-spacing: -0.01em;">Broadcast Stream Offline</strong>
-                        <p style="font-size: 0.82rem; color: #94a3b8; font-weight: 500; margin-top: 0.25rem; line-height: 1.4;">
-                            Join us physically at Mercy Seat Transformational Ministries or check back during our live service streaming hours!
+                        <strong style="font-size: 1.1rem; font-weight: 800; color: #ffffff; display: block;">Broadcast Stream Offline</strong>
+                        <p style="font-size: 0.82rem; color: #94a3b8; font-weight: 500; margin-top: 0.25rem; line-height: 1.45;">
+                            Join us physically this Sunday at the main sanctuary or check back during our live streaming service!
                         </p>
                     </div>
-                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="background-color: #334155; font-size: 0.85rem; padding: 0.6rem 1.25rem; border-radius: 4px; border: 1px solid #475569; width: auto; color: #ffffff; text-decoration: none;">
+                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="background-color: #334155; font-size: 0.82rem; padding: 0.6rem 1.25rem; border-radius: 4px; border: 1px solid #475569; width: auto; color: #ffffff; text-decoration: none;">
                         📖 View Past Messages
                     </a>
                 </div>
             {% endif %}
-
         </div>
 
     </div>
+
     <!-- 🖼️ THECHURCHCO x AXIS ASSETS CINEMATIC GALLERY MODULE -->
     <div style="margin-top: 4.5rem; margin-bottom: 2rem; text-align: left;">
         <span style="font-size: 0.72rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Sanctuary Life</span>
-        <h2 style="font-size: 1.45rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em; border-bottom: 1px solid rgba(30, 41, 59, 0.08); padding-bottom: 0.75rem; margin-bottom: 2rem;">
+        <h2 style="font-size: 1.45rem; font-weight: 900; color: #0f172a; letter-spacing: -0.02em; border-bottom: 1px solid rgba(30, 41, 59, 0.08); padding-bottom: 0.75rem; margin-bottom: 2rem;">
             📸 Glances of Praise &amp; Ministry Life
         </h2>
 
-        <!-- High-Contrast Multi-Column Visual Card Matrix -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;" class="church-visual-grid">
             {% for asset in church_gallery %}
-                <!-- Cinematic Image Container Box -->
-                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; box-shadow: 0 10px 30px -15px rgba(30,41,59,0.08); border: none;">
-
-                    <!-- Dynamic Landscape Photo Render -->
+                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 6px; box-shadow: 0 10px 30px -15px rgba(30,41,59,0.08); border: none;">
                     <img src="{{ asset.image.url }}" alt="{{ asset.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);" class="gallery-photo-zoom">
-
-                    <!-- Sleek Gradient Underlay Shadow Overlay -->
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem 1.5rem 1.25rem 1.5rem; background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0) 100%); text-align: left;">
                         <strong style="color: #ffffff; font-size: 0.95rem; font-weight: 800; letter-spacing: -0.01em; display: block;">{{ asset.title }}</strong>
                     </div>
                 </div>
             {% empty %}
-                <!-- Clean Empty State Placeholder Layout -->
-                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; border: none; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); display: flex; align-items: center; justify-content: center;">
+                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 6px; border: none; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); display: flex; align-items: center; justify-content: center;">
                     <div style="text-align: center; padding: 2rem; color: #ffffff;">
                         <span style="font-size: 1.75rem; display: block; margin-bottom: 0.4rem;">🌟</span>
                         <strong style="font-size: 0.92rem; font-weight: 800; display: block; letter-spacing: 0.02em; text-transform: uppercase; color: #991b1b;">Sanctuary Doors Open</strong>
@@ -152,16 +149,11 @@
         </div>
     </div>
 
-    <!-- ⚡ Dynamic Styling Hover Effects Interface Override -->
+    <!-- Interface Hover Interactions Style Block -->
     <style>
-        .gallery-photo-zoom:hover {
-            transform: scale(1.04);
-        }
+        .gallery-photo-zoom:hover { transform: scale(1.04); }
         @media (max-width: 640px) {
-            .church-visual-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1.25rem !important;
-            }
+            .church-visual-grid { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
         }
     </style>
 
