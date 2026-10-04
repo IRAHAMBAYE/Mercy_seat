@@ -133,7 +133,7 @@
             z-index: 10005;
         }
 
-        /* Keep mobile-only items completely invisible on desktop layouts */
+        /* Explicitly force mobile menu nodes to show during display overrides */
         .mobile-only-item {
             display: none !important;
         }
@@ -250,7 +250,7 @@
             transition: all 0.25s ease;
             margin-top: 0.5rem;
         }
-        /* 📱 MOBILE RESPONSIVENESS OVERLAYS */
+        /* 📱 MOBILE RESPONSIVENESS OVERLAYS WITH UNIFIED GIVING CHANNEL */
         @media (max-width: 768px) {
             .container { padding: 0 1rem; }
             .church-nav { padding: 0.85rem 0; }
@@ -273,12 +273,15 @@
             .nav-right-actions {
                 display: none !important;
             }
+
+            /* FORCE THE MOBILE GIVING PORTAL ELEMENT TARGET TO DISPLAY ON SMARTPHONES */
             .church-dropdown-menu .mobile-only-item {
                 display: block !important;
-                border-bottom: 1px dashed rgba(30, 41, 59, 0.08);
+                border-bottom: 1px dashed rgba(30, 41, 59, 0.12) !important;
                 padding-bottom: 0.25rem;
                 margin-bottom: 0.25rem;
             }
+
             .church-dropdown-menu {
                 position: absolute;
                 top: 100%;
@@ -316,14 +319,14 @@
                 <span class="dropdown-trigger-btn" id="mobileMenuTrigger">☰ Navigation Menu</span>
                 <ul class="church-dropdown-menu" id="churchDropdownMenu">
 
-                    <!-- 💸 MOBILE-ONLY GIVING NODE -->
+                    <!-- 💸 MOBILE-ONLY GIVING NODE (Visible exclusively on Android viewport) -->
                     <li class="mobile-only-item">
-                        <a href="/give/" style="color: #991b1b; font-weight: 900;">💸 Giving Portal</a>
+                        <a href="{% url 'church_giving_portal' %}" style="color: #991b1b !important; font-weight: 900; background-color: rgba(153, 27, 27, 0.04);">💸 Giving Portal</a>
                     </li>
 
                     <li><a href="/">Home</a></li>
-                    <li><a href="/sermons/">Sermons Center</a></li>
-                    <li><a href="/events/">Events Log</a></li>
+                    <li><a href="{% url 'sermons_center' %}">Sermons Center</a></li>
+                    <li><a href="{% url 'events_log' %}">Events Log</a></li>
 
                     <!-- ⛪ PUBLIC PROJECTS REBRAND LINK -->
                     <li><a href="{% url 'projects_directory' %}" style="color: #1e293b; border-top: 1px dashed rgba(30, 41, 59, 0.08); padding-top: 0.8rem; margin-top: 0.25rem;">⛪ Ministries Projects</a></li>
@@ -331,16 +334,16 @@
                     <!-- 🔒 ADMIN STAFF AUTHENTICATED ROWS -->
                     {% if user.is_authenticated %}
                         {% if user.is_staff or user.is_superuser %}
-                            <li style="border-top: 1px dashed rgba(30, 41, 59, 0.08); margin-top: 0.25rem;"><a href="{% url 'pastor_admin_desk' %}" style="color: #991b1b;">⛪ Admin Desk</a></li>
+                            <li style="border-top: 1px dashed rgba(30, 41, 59, 0.08); margin-top: 0.25rem;"><a href="{% url 'pastor_admin_desk' %}" style="color: #991b1b;">... Admin Desk</a></li>
                         {% endif %}
                     {% endif %}
                 </ul>
             </li>
         </div>
 
-        <!-- Right Column: Contribution Action Crimson Button -->
+        <!-- Right Column: Contribution Action Crimson Button (Hidden automatically on smaller screens) -->
         <div class="nav-right-actions">
-            <li><a href="/give/" class="btn-give-accent">💸 Giving</a></li>
+            <li><a href="{% url 'church_giving_portal' %}" class="btn-give-accent">💸 Giving</a></li>
         </div>
 
     </div>
