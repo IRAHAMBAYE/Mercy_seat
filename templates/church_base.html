@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>{% block title %}PEFA Thika Road Cathedral | Sanctuary of Praise &amp; Glory{% endblock %}</title>
+    <title>{% block title %}Mercy Seat Transformational Ministries | Sanctuary of Grace & Glory{% endblock %}</title>
 
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
 
-    <!-- 📊 LIVE LOCAL STATIC CHARTING ENGINE LINK (Loads instantly from your laptop hard drive) -->
+    <!-- 📊 LIVE LOCAL STATIC CHARTING ENGINE LINK -->
     <script src="{% static 'core/js/chart.js' %}" defer></script>
 
-    <!-- 🎨 THE ROYAL ALTAR EDITORIAL DESIGN SYSTEM -->
+    <!-- 🎨 NEW BRANDING STYLE SHEET (CRIMSON & CHARCOAL DESIGN SYSTEM) -->
     <style>
         * {
             box-sizing: border-box;
@@ -21,8 +21,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
-            background-color: #fcfbfa; /* Pure Altar Sand Soft Canvas */
-            color: #0b1329; /* Deep Velvet Navy */
+            background-color: #f8fafc; /* Clean, Bright Canvas Slate */
+            color: #1e293b; /* Charcoal Slate Gray Text */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -45,12 +45,12 @@
         /* ⛪ ELEVATED MINIMALIST NAVBAR NAVIGATION BAR */
         .church-nav {
             background-color: #ffffff;
-            border-bottom: 1px solid rgba(11, 19, 41, 0.06);
-            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.08);
+            padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 10000;
-            box-shadow: 0 10px 40px -20px rgba(11, 19, 41, 0.05);
+            box-shadow: 0 10px 40px -20px rgba(30, 41, 59, 0.05);
         }
 
         /* 🎯 THREE-COLUMN CENTER ALIGNMENT MATRIX GRID */
@@ -72,26 +72,24 @@
             list-style: none;
         }
 
-        .church-brand {
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: #0b1329;
+        /* ⛪ BRANDING CONTAINER FOR THE NEW LOGO IMAGE */
+        .church-brand-link {
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            white-space: nowrap;
         }
-        .church-brand span {
-            color: #dfb15b; /* Polished Refinery Gold */
-            font-weight: 400;
+        .church-logo-img {
+            height: 48px; /* Smooth professional dimensions */
+            width: auto;
+            object-fit: contain;
         }
 
-        /* 📱 RESPONSIVE ANDROID / MOBILE DROPDOWN SYSTEM */
+        /* 📱 RESPONSIVE MOBILE DROPDOWN SYSTEM */
         .church-dropdown-wrapper {
             position: relative;
         }
         .dropdown-trigger-btn {
-            color: #4a5568;
+            color: #475569;
             font-weight: 700;
             font-size: 0.82rem;
             text-transform: uppercase;
@@ -102,20 +100,20 @@
             gap: 0.35rem;
             user-select: none;
             padding: 0.5rem 1rem;
-            border: 1px solid rgba(11, 19, 41, 0.06);
+            border: 1px solid rgba(30, 41, 59, 0.08);
             border-radius: 20px;
-            background-color: #faf9f6;
+            background-color: #f1f5f9;
             transition: all 0.2s ease;
         }
         .dropdown-trigger-btn:hover {
-            color: #dfb15b;
-            border-color: rgba(223, 177, 91, 0.3);
+            color: #991b1b; /* Vibrant Brand Crimson Red */
+            border-color: rgba(153, 27, 27, 0.3);
             background-color: #ffffff;
         }
         .dropdown-trigger-btn::after {
             content: "▼";
             font-size: 0.55rem;
-            color: #a0aec0;
+            color: #94a3b8;
             transition: transform 0.2s ease;
         }
         /* Dropdown Overlay Floating Body Menu Card */
@@ -128,8 +126,8 @@
             background-color: #ffffff;
             min-width: 220px;
             border-radius: 8px;
-            border: 1px solid rgba(11, 19, 41, 0.08);
-            box-shadow: 0 15px 35px -5px rgba(11, 19, 41, 0.12);
+            border: 1px solid rgba(30, 41, 59, 0.1);
+            box-shadow: 0 15px 35px -5px rgba(30, 41, 59, 0.12);
             padding: 0.5rem 0;
             margin-top: 0.5rem;
             z-index: 10005;
@@ -148,7 +146,7 @@
             }
             .church-dropdown-wrapper:hover .dropdown-trigger-btn::after {
                 transform: rotate(180deg);
-                color: #dfb15b;
+                color: #991b1b;
             }
         }
 
@@ -164,7 +162,7 @@
         .church-dropdown-menu a {
             display: block;
             padding: 0.8rem 1.5rem;
-            color: #4a5568;
+            color: #475569;
             font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -173,8 +171,8 @@
             transition: all 0.2s ease;
         }
         .church-dropdown-menu a:hover {
-            background-color: #faf9f6;
-            color: #dfb15b;
+            background-color: #f1f5f9;
+            color: #991b1b;
             padding-left: 1.75rem;
         }
 
@@ -182,9 +180,10 @@
             from { opacity: 0; transform: translateX(-50%) translateY(8px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
-        /* Premium Gold Giving Call-To-Action Button Layer */
+
+        /* New Crimson Red Giving Call-To-Action Button Layer */
         .btn-give-accent {
-            background-color: #dfb15b !important;
+            background-color: #991b1b !important;
             color: #ffffff !important;
             padding: 0.65rem 1.25rem;
             border-radius: 4px;
@@ -193,34 +192,34 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             text-decoration: none;
-            box-shadow: 0 6px 15px -5px rgba(223, 177, 91, 0.4);
+            box-shadow: 0 6px 15px -5px rgba(153, 27, 27, 0.4);
             transition: all 0.2s ease;
         }
         .btn-give-accent:hover {
-            background-color: #0b1329 !important;
-            box-shadow: 0 6px 15px -5px rgba(11, 19, 41, 0.3);
+            background-color: #0f172a !important; /* Dark Onyx Slate Hover */
+            box-shadow: 0 6px 15px -5px rgba(15, 23, 42, 0.3);
         }
         /* 📑 LUXURY EDITORIAL SANCTUARY CARDS */
         .sanctuary-card {
             background: #ffffff;
             border-radius: 8px;
-            border: 1px solid rgba(11, 19, 41, 0.05);
-            box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03);
+            border: 1px solid rgba(30, 41, 59, 0.06);
+            box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03);
             padding: 3.5rem 3rem;
             margin-bottom: 2rem;
             transition: all 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
         }
         .sanctuary-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 25px 55px -20px rgba(11, 19, 41, 0.06);
-            border-color: rgba(223, 177, 91, 0.3);
+            box-shadow: 0 25px 55px -20px rgba(30, 41, 59, 0.06);
+            border-color: rgba(153, 27, 27, 0.3);
         }
         /* 🚀 MAJESTIC SEED ACTION BUTTONS */
         .btn-kingdom {
             display: inline-block;
             width: 100%;
             padding: 1.1rem 2.25rem;
-            background-color: #0b1329;
+            background-color: #0f172a;
             color: #ffffff;
             font-weight: 800;
             font-size: 0.85rem;
@@ -234,29 +233,28 @@
             transition: all 0.25s ease;
         }
         .btn-kingdom:hover {
-            background-color: #dfb15b;
+            background-color: #991b1b;
             color: #ffffff;
-            box-shadow: 0 10px 25px -5px rgba(223, 177, 91, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(153, 27, 27, 0.3);
         }
         /* 🎛️ SOFT ARCHITECTURAL TEXT CONTROLS */
         .form-church-control {
             width: 100%;
             padding: 1.1rem 1.25rem;
-            background-color: #faf9f6;
-            border: 1px solid rgba(11, 19, 41, 0.08);
+            background-color: #f1f5f9;
+            border: 1px solid rgba(30, 41, 59, 0.08);
             border-radius: 4px;
-            color: #0b1329;
+            color: #1e293b;
             font-size: 0.95rem;
             outline: none;
             transition: all 0.25s ease;
             margin-top: 0.5rem;
         }
-        /* 📱 ULTRA-READABLE MOBILE BREAKPOINTS WITH TWO-TIER STACKING */
+        /* 📱 MOBILE RESPONSIVENESS OVERLAYS */
         @media (max-width: 768px) {
             .container { padding: 0 1rem; }
             .church-nav { padding: 0.85rem 0; }
 
-            /* Re-architect to single-column flex structure to fit mobile displays */
             .nav-flex {
                 display: flex !important;
                 flex-direction: column !important;
@@ -272,21 +270,15 @@
                 display: block !important;
                 width: auto;
             }
-
-            /* Hide the separate header desktop column container on small views */
             .nav-right-actions {
                 display: none !important;
             }
-
-            /* Force the mobile giving element to show within the dropdown box stack */
             .church-dropdown-menu .mobile-only-item {
                 display: block !important;
-                border-bottom: 1px dashed rgba(11, 19, 41, 0.08);
+                border-bottom: 1px dashed rgba(30, 41, 59, 0.08);
                 padding-bottom: 0.25rem;
                 margin-bottom: 0.25rem;
             }
-
-            /* Re-align mobile menu to overlay neatly beneath the middle button placement */
             .church-dropdown-menu {
                 position: absolute;
                 top: 100%;
@@ -311,42 +303,42 @@
 <nav class="church-nav">
     <div class="container nav-flex">
 
-        <!-- Left Column: Branding Logo updated to Cathedral text rules -->
+        <!-- Left Column: Branding Logo Injection pointing to your new logo.jpeg file -->
         <div class="nav-left-brand">
-            <a href="/" class="church-brand">
-                ⛪ PEFA <span>Thika Road Cathedral</span>
+            <a href="/" class="church-brand-link">
+                <img src="/media/logo.jpeg" alt="Mercy Seat Logo" class="church-logo-img">
             </a>
         </div>
 
-        <!-- Middle Column: Dynamic Centered Menu Trigger with Nested Responsive Giving Node -->
+        <!-- Middle Column: Centered Responsive Navigation Triggers -->
         <div class="nav-center-menu">
             <li class="church-dropdown-wrapper">
-                <span class="dropdown-trigger-btn" id="mobileMenuTrigger">☰ Menu Atrium</span>
+                <span class="dropdown-trigger-btn" id="mobileMenuTrigger">☰ Navigation Menu</span>
                 <ul class="church-dropdown-menu" id="churchDropdownMenu">
 
-                    <!-- 💸 RESPONSIVE MOBILE-ONLY GIVING INJECTION LINK -->
+                    <!-- 💸 MOBILE-ONLY GIVING NODE -->
                     <li class="mobile-only-item">
-                        <a href="/give/" style="color: #dfb15b; font-weight: 900;">💸 Giving Portal</a>
+                        <a href="/give/" style="color: #991b1b; font-weight: 900;">💸 Giving Portal</a>
                     </li>
 
                     <li><a href="/">Home</a></li>
                     <li><a href="/sermons/">Sermons Center</a></li>
                     <li><a href="/events/">Events Log</a></li>
 
-                    <!-- ⛪ PUBLIC PROJECTS DIRECTORY LINK -->
-                    <li><a href="{% url 'projects_directory' %}" style="color: #0b1329; border-top: 1px dashed rgba(11, 19, 41, 0.08); padding-top: 0.8rem; margin-top: 0.25rem;">⛪ Cathedral Projects</a></li>
+                    <!-- ⛪ PUBLIC PROJECTS REBRAND LINK -->
+                    <li><a href="{% url 'projects_directory' %}" style="color: #1e293b; border-top: 1px dashed rgba(30, 41, 59, 0.08); padding-top: 0.8rem; margin-top: 0.25rem;">⛪ Ministries Projects</a></li>
 
-                    <!-- 🔒 DYNAMIC STAFF SECURITY LINK ROW -->
+                    <!-- 🔒 ADMIN STAFF AUTHENTICATED ROWS -->
                     {% if user.is_authenticated %}
                         {% if user.is_staff or user.is_superuser %}
-                            <li style="border-top: 1px dashed rgba(11, 19, 41, 0.08); margin-top: 0.25rem;"><a href="{% url 'pastor_admin_desk' %}" style="color: #dfb15b;">⛪ Admin Desk</a></li>
+                            <li style="border-top: 1px dashed rgba(30, 41, 59, 0.08); margin-top: 0.25rem;"><a href="{% url 'pastor_admin_desk' %}" style="color: #991b1b;">⛪ Admin Desk</a></li>
                         {% endif %}
                     {% endif %}
                 </ul>
             </li>
         </div>
 
-        <!-- Right Column: Contribution Action Accent Button (Automatically Hidden on Mobile viewports) -->
+        <!-- Right Column: Contribution Action Crimson Button -->
         <div class="nav-right-actions">
             <li><a href="/give/" class="btn-give-accent">💸 Giving</a></li>
         </div>
@@ -354,7 +346,7 @@
     </div>
 </nav>
 
-<!-- MOBILE COHESION TAP TRIGGER EVENT SCRIPTS -->
+<!-- MOBILE MENU SCRIPTS -->
 <script>
     document.getElementById('mobileMenuTrigger').addEventListener('click', function(e) {
         e.stopPropagation();
@@ -365,33 +357,33 @@
     });
 </script>
 
-<!-- SYSTEM NOTIFICATION EMBED CHANNEL -->
+<!-- SYSTEM MESSAGES DECK -->
 {% if messages %}
 <div class="container" style="margin-top: 1.5rem;">
     {% for message in messages %}
-        <div style="background-color: #fcfbfa; color: #0b1329; padding: 1rem 1.25rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; border: 1px solid rgba(11, 19, 41, 0.08); border-left: 4px solid #dfb15b;">
+        <div style="background-color: #ffffff; color: #1e293b; padding: 1rem 1.25rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; border: 1px solid rgba(30, 41, 59, 0.08); border-left: 4px solid #991b1b;">
             ✨ {{ message }}
         </div>
     {% endfor %}
 </div>
 {% endif %}
 
-<!-- TEMPLATE VIEWS MOUNT DESK -->
+<!-- CORE VIEW CONTENT CONTAINER -->
 <main class="main-sanctuary-content">
     {% block content %}
     {% endblock %}
 </main>
 
-<!-- REGAL MINISTRY FOOTER CANVAS -->
-<footer style="background-color: #0b1329; color: #ffffff; border-top: 3px solid #dfb15b; padding: 4rem 0; text-align: center; margin-top: auto;">
+<!-- REGAL BRUSHED CHARCOAL FOOTER CANVAS -->
+<footer style="background-color: #0f172a; color: #ffffff; border-top: 3px solid #991b1b; padding: 4rem 0; text-align: center; margin-top: auto;">
     <div class="container">
-        <p style="margin: 0 0 0.5rem 0; font-weight: 900; font-size: 1.2rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ffffff;">PEFA Church Thika Road Cathedral</p>
-        <p style="margin: 0 0 2rem 0; font-size: 0.85rem; color: #94a3b8; font-weight: 500;"> A Christ-Centered Ministry &bull; Transforming Generations</p>
+        <p style="margin: 0 0 0.5rem 0; font-weight: 900; font-size: 1.2rem; letter-spacing: 0.04em; text-transform: uppercase; color: #ffffff;">Mercy Seat Transformational Ministries</p>
+        <p style="margin: 0 0 2rem 0; font-size: 0.85rem; color: #94a3b8; font-weight: 500;">A Christ-Centered Ministry &bull; Transforming Generations</p>
 
         <div style="width: 30px; height: 1px; background-color: rgba(255,255,255,0.1); margin: 0 auto 2rem auto;"></div>
 
         <p style="margin: 0; font-size: 0.78rem; color: #64748b; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.5;">
-            &copy; {% now "Y" %} PEFA Thika Road &bull; Offered to Glory by <strong>Taylor</strong> — Nairobi.
+            &copy; {% now "Y" %} Mercy Seat Transformational Ministries &bull; Offered to Glory — Nairobi.
         </p>
     </div>
 </footer>

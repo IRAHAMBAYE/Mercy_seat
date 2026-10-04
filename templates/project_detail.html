@@ -1,27 +1,27 @@
 {% extends 'church_base.html' %}
 
-{% block title %}{{ project.title }} | Cathedral Vision Projects{% endblock %}
+{% block title %}{{ project.title }} | Church Vision Projects{% endblock %}
 
 {% block content %}
 <div class="container" style="max-width: 960px; margin: 0 auto;">
-    
+
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: start;">
-        
+
         <!-- Left Side: Project Media Preview Canvas & Description Text -->
         <div style="text-align: left;">
-            <div style="width: 100%; height: 280px; border-radius: 4px; overflow: hidden; background-color: #0b1329; margin-bottom: 1.5rem; box-shadow: 0 15px 35px -10px rgba(11,19,41,0.1);">
+            <div style="width: 100%; height: 280px; border-radius: 4px; overflow: hidden; background-color: #0f172a; margin-bottom: 1.5rem; box-shadow: 0 15px 35px -10px rgba(15,23,42,0.1);">
                 <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            
-            <h2 style="font-size: 1.6rem; font-weight: 900; color: #0b1329; letter-spacing: -0.02em; margin-bottom: 0.75rem; line-height: 1.3;">{{ project.title }}</h2>
-            
+
+            <h2 style="font-size: 1.6rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em; margin-bottom: 0.75rem; line-height: 1.3;">{{ project.title }}</h2>
+
             <!-- Live Progression Box Info Card -->
-            <div style="background-color: #faf9f6; padding: 1.25rem; border-radius: 4px; border: 1px solid rgba(11,19,41,0.06); margin-bottom: 1.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; font-weight: 800; color: #4a5568; margin-bottom: 0.5rem;">
+            <div style="background-color: #f1f5f9; padding: 1.25rem; border-radius: 4px; border: 1px solid rgba(30,41,59,0.06); margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; font-weight: 800; color: #475569; margin-bottom: 0.5rem;">
                     <span>Fundraising Status: {{ project.progress_percentage }}% Completed</span>
                 </div>
-                <div style="width: 100%; height: 8px; background-color: #ffffff; border-radius: 10px; overflow: hidden; border: 1px solid rgba(11,19,41,0.04); margin-bottom: 0.75rem;">
-                    <div style="width: {{ project.progress_percentage }}%; height: 100%; background-color: #dfb15b; border-radius: 10px;"></div>
+                <div style="width: 100%; height: 8px; background-color: #ffffff; border-radius: 10px; overflow: hidden; border: 1px solid rgba(30,41,59,0.04); margin-bottom: 0.75rem;">
+                    <div style="width: {{ project.progress_percentage }}%; height: 100%; background-color: #991b1b; border-radius: 10px;"></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #64748b;">
                     <span>Collected: <strong>KES {{ project.total_raised|floatformat:0 }}</strong></span>
@@ -29,45 +29,45 @@
                 </div>
             </div>
 
-            <p style="font-size: 0.95rem; color: #4a5568; line-height: 1.65; white-space: pre-line;">{{ project.description }}</p>
+            <p style="font-size: 0.95rem; color: #475569; line-height: 1.65; white-space: pre-line;">{{ project.description }}</p>
         </div>
 
         <!-- Right Side: Deep-Linked Pre-Filled Lipa Na M-Pesa Input Offering Box Form -->
-        <div class="sanctuary-card" style="border-top: 4px solid #dfb15b; padding: 2.5rem 2rem; background-color: #ffffff; margin-bottom: 0; position: sticky; top: 100px;">
+        <div class="sanctuary-card" style="border-top: 4px solid #991b1b; padding: 2.5rem 2rem; background-color: #ffffff; margin-bottom: 0; position: sticky; top: 100px;">
             <div style="text-align: center; margin-bottom: 2rem;">
                 <span style="font-size: 2.25rem; display: block; margin-bottom: 0.25rem;">🌱</span>
-                <h3 style="font-size: 1.25rem; font-weight: 900; color: #0b1329; text-transform: uppercase; letter-spacing: -0.01em; margin: 0;">Dedicated Giving</h3>
-                <p style="font-size: 0.82rem; color: #718096; margin-top: 0.25rem; line-height: 1.35;">Your online seed is routed dynamically to support this specific development goal.</p>
+                <h3 style="font-size: 1.25rem; font-weight: 900; color: #1e293b; text-transform: uppercase; letter-spacing: -0.01em; margin: 0;">Dedicated Giving</h3>
+                <p style="font-size: 0.82rem; color: #64748b; margin-top: 0.25rem; line-height: 1.35;">Your online seed is routed dynamically to support this specific development goal.</p>
             </div>
 
             <!-- Posts seamlessly straight into your master church_giving_portal pipeline controller -->
             <form method="POST" action="{% url 'church_giving_portal' %}" style="display: flex; flex-direction: column; gap: 1.25rem; text-align: left;">
                 {% csrf_token %}
-                
+
                 <!-- Automatically locked string identifier passed to account_reference variables -->
                 <input type="hidden" name="giving_type" value="{{ project.title }}">
 
                 <div>
-                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Target Allocation Vision</label>
-                    <input type="text" value="⛪ {{ project.title }}" disabled class="form-church-control" style="margin-top: 0; padding: 0.85rem 1rem; height: auto; font-weight: 700; background-color: #faf9f6; color: #718096; border-color: rgba(11,19,41,0.04);">
+                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Target Allocation Vision</label>
+                    <input type="text" value="⛪ {{ project.title }}" disabled class="form-church-control" style="margin-top: 0; padding: 0.85rem 1rem; height: auto; font-weight: 700; background-color: #f1f5f9; color: #64748b; border-color: rgba(30,41,59,0.04);">
                 </div>
 
                 <div>
-                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Your Full Name (Optional)</label>
+                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Your Full Name (Optional)</label>
                     <input type="text" name="fullname" class="form-church-control" placeholder="e.g. Elder Taylor" style="margin-top: 0; padding: 0.85rem 1rem; height: auto;">
                 </div>
 
                 <div>
-                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Amount to Seed (KES)</label>
-                    <input type="number" name="amount" placeholder="e.g. 5000" min="10" required class="form-church-control" style="margin-top: 0; padding: 0.85rem 1rem; height: auto; text-align: center; font-size: 1.1rem; font-weight: 700; color: #dfb15b;">
+                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Amount to Seed (KES)</label>
+                    <input type="number" name="amount" placeholder="e.g. 5000" min="10" required class="form-church-control" style="margin-top: 0; padding: 0.85rem 1rem; height: auto; text-align: center; font-size: 1.1rem; font-weight: 700; color: #991b1b;">
                 </div>
 
                 <div>
-                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Safaricom Phone Number</label>
+                    <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Safaricom Phone Number</label>
                     <input type="text" name="phone" value="2547" placeholder="e.g. 2547XXXXXXXX" required class="form-church-control" style="margin-top: 0; padding: 0.85rem 1rem; height: auto; text-align: center; font-size: 1rem; letter-spacing: 0.04em;">
                 </div>
 
-                <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #0b1329; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 6px 15px -5px rgba(11, 19, 41, 0.3);">
+                <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #0f172a; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 6px 15px -5px rgba(15, 23, 42, 0.3);">
                     🚀 Push Lipa Na M-Pesa Prompt
                 </button>
             </form>

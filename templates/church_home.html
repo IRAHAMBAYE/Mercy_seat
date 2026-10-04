@@ -5,22 +5,22 @@
 <div class="container">
 
     <!-- ⛪ PREMIUM HERO BRANDING & AUTOMATED SLIDER AREA -->
-    <div class="sanctuary-card" style="padding: 3.5rem 2.5rem; background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 100%); color: #ffffff; border: none; margin-bottom: 3rem; position: relative; overflow: hidden;">
+    <div class="sanctuary-card" style="padding: 3.5rem 2.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; border: none; margin-bottom: 3rem; position: relative; overflow: hidden;">
 
         <!-- CSS Grid layout splitting the Hero Card into 2 columns on desktop screens -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; align-items: center; position: relative; z-index: 10;">
 
             <!-- Column 1: Welcome text contents, description, and action navigation links -->
             <div style="text-align: left; max-width: 580px;">
-                <span style="font-size: 0.78rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Welcome to the House of Praise &amp; Transformation</span>
-                <h1 style="font-size: 2.35rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.2; margin: 0 0 1rem 0; color: #ffffff; text-transform: uppercase;">PEFA THIKA ROAD CATHEDRAL</h1>
+                <span style="font-size: 0.78rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Welcome to the House of Praise &amp; Transformation</span>
+                <h1 style="font-size: 2.35rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.2; margin: 0 0 1rem 0; color: #ffffff; text-transform: uppercase;">MERCY SEAT TRANSFORMATIONAL MINISTRIES</h1>
                 <p style="font-size: 1rem; color: #cbd5e1; font-weight: 500; line-height: 1.6; margin-bottom: 2.25rem;">
                     A vibrant multi-generational community of believers celebrating Christ, growing together in the word, and transforming our generation.
                 </p>
 
                 <div style="display: flex; gap: 0.75rem; justify-content: flex-start; flex-wrap: wrap;">
-                    <a href="{% url 'church_giving_portal' %}" class="btn-kingdom" style="background-color: #dfb15b; color: #ffffff; width: auto; padding: 0.85rem 1.75rem; box-shadow: 0 6px 15px -5px rgba(223, 177, 91, 0.4);">💸 Support Ministry Giving</a>
-                    <a href="{% url 'prayer_desk' %}" class="btn-kingdom" style="background-color: transparent; border: 2px solid #cbd5e1; color: #ffffff; width: auto; padding: 0.8rem 1.75rem;">🙏 Submit Prayer Need</a>
+                    <a href="{% url 'church_giving_portal' %}" class="btn-kingdom" style="background-color: #991b1b; color: #ffffff; width: auto; padding: 0.85rem 1.75rem; box-shadow: 0 6px 15px -5px rgba(153, 27, 27, 0.4);">💸 Support Ministry Giving</a>
+                    <a href="{% url 'prayer_desk' %}" class="btn-kingdom" style="background-color: transparent; border: 2px solid #cbd5e1; color: #ffffff; width: auto; padding: 0.80rem 1.75rem;">🙏 Submit Prayer Need</a>
                 </div>
             </div>
 
@@ -32,14 +32,14 @@
                     {% for asset in church_gallery|slice:":4" %}
                         <div style="width: 25%; height: 100%; position: relative; flex-shrink: 0;">
                             <img src="{{ asset.image.url }}" alt="{{ asset.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(11, 19, 41, 0.9)); padding: 2rem 1.25rem 1rem; font-size: 0.88rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(15, 23, 42, 0.9)); padding: 2rem 1.25rem 1rem; font-size: 0.88rem; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">
                                 📸 {{ asset.title }}
                             </div>
                         </div>
                     {% empty %}
                         <!-- Fallback slider graphic states in case your model database loops empty -->
-                        <div style="width: 25%; height: 100%; background: linear-gradient(135deg, #1e293b 0%, #0b1329 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; flex-shrink: 0;">
-                            <div style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500;">🌟 PEFA Sanctuary Life Moving Gallery</div>
+                        <div style="width: 25%; height: 100%; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; flex-shrink: 0;">
+                            <div style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500;">🌟 Mercy Seat Sanctuary Life Moving Gallery</div>
                         </div>
                     {% endfor %}
                 </div>
@@ -68,21 +68,20 @@
         <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;">
             <div>
                 <span style="font-size: 1.75rem; display: block; margin-bottom: 0.5rem;">🗓️</span>
-                <h3 style="font-size: 1.15rem; font-weight: 800; color: #0b1329; letter-spacing: -0.02em; margin-bottom: 0.5rem;">Weekly Service Schedule</h3>
+                <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; letter-spacing: -0.02em; margin-bottom: 0.5rem;">Weekly Service Schedule</h3>
                 <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.5rem;">👉 **Sunday Main Worship:** 9:00 AM — 12:30 PM</p>
                 <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5; margin-bottom: 0.5rem;">👉 **Mon-Fri Revival Services:** 5:30 PM — 7:00 PM</p>
                 <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.5;">👉 **Saturday Crusade:** 4:00 PM — 6:00 PM</p>
             </div>
-            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; background-color: #faf9f6; padding: 0.6rem 1rem; border-radius: 4px; border: 1px solid rgba(11, 19, 41, 0.08);">
-                📍 Location: Thika Road, Sanctuary Main Auditorium
+            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600; background-color: #f1f5f9; padding: 0.6rem 1rem; border-radius: 4px; border: 1px solid rgba(30, 41, 59, 0.08);">
+                📍 Location: Main Sanctuary Auditorium
             </div>
         </div>
         <!-- Latest Altar Sermon Highlight / YouTube Live Responsive Embed Card -->
         <div class="sanctuary-card" style="text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; padding: 0; overflow: hidden;">
-
             {% if youtube_video_id %}
                 <!-- 📺 16:9 PROPORTION RESPONSIVE IFRAME VIDEO PLAYER WRAPPER -->
-                <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background-color: #0b1329;">
+                <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background-color: #0f172a;">
                     <iframe src="https://youtube.com{{ youtube_video_id }}"
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -90,24 +89,24 @@
                     </iframe>
                 </div>
 
-                <div style="padding: 1.5rem; border-top: 3px solid #dfb15b;">
-                    <span style="font-size: 0.68rem; font-weight: 800; color: #16a34a; background-color: #dcfce7; padding: 0.25rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.5rem;">
+                <div style="padding: 1.5rem; border-top: 3px solid #991b1b;">
+                    <span style="font-size: 0.68rem; font-weight: 800; color: #15803d; background-color: #dcfce7; padding: 0.25rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 0.5rem;">
                         📡 Live / Recorded Altar Broadcast
                     </span>
-                    <h4 style="margin: 0 0 0.25rem 0; font-size: 1.05rem; font-weight: 800; color: #0b1329; letter-spacing: -0.01em;">{{ featured_sermon.title }}</h4>
+                    <h4 style="margin: 0 0 0.25rem 0; font-size: 1.05rem; font-weight: 800; color: #1e293b; letter-spacing: -0.01em;">{{ featured_sermon.title }}</h4>
                     <p style="margin: 0 0 1rem 0; font-size: 0.82rem; color: #64748b; font-weight: 700;">Preached By: {{ featured_sermon.preacher }}</p>
-                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; border-radius: 4px; background-color: #0b1329; color: #ffffff; display: inline-block; text-align: center; text-decoration: none;">
+                    <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="padding: 0.6rem 1.25rem; font-size: 0.85rem; border-radius: 4px; background-color: #0f172a; color: #ffffff; display: inline-block; text-align: center; text-decoration: none;">
                         📸 Explore Archive Library
                     </a>
                 </div>
             {% else %}
                 <!-- 🛑 OFFLINE STATE FALLBACK GRAPHIC CONTEXT -->
-                <div style="background: linear-gradient(135deg, #1e293b 0%, #0b1329 100%); padding: 3.5rem 2rem; text-align: center; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; flex-grow: 1;">
+                <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 3.5rem 2rem; text-align: center; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; flex-grow: 1;">
                     <span style="font-size: 2.5rem; line-height: 1;">📡</span>
                     <div>
                         <strong style="font-size: 1.1rem; font-weight: 800; color: #ffffff; display: block; letter-spacing: -0.01em;">Broadcast Stream Offline</strong>
                         <p style="font-size: 0.82rem; color: #94a3b8; font-weight: 500; margin-top: 0.25rem; line-height: 1.4;">
-                            Join us physically at PEFA Thika Road Cathedral or check back during our live service streaming hours!
+                            Join us physically at Mercy Seat Transformational Ministries or check back during our live service streaming hours!
                         </p>
                     </div>
                     <a href="{% url 'sermons_center' %}" class="btn-kingdom" style="background-color: #334155; font-size: 0.85rem; padding: 0.6rem 1.25rem; border-radius: 4px; border: 1px solid #475569; width: auto; color: #ffffff; text-decoration: none;">
@@ -121,8 +120,8 @@
     </div>
     <!-- 🖼️ THECHURCHCO x AXIS ASSETS CINEMATIC GALLERY MODULE -->
     <div style="margin-top: 4.5rem; margin-bottom: 2rem; text-align: left;">
-        <span style="font-size: 0.72rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Sanctuary Life</span>
-        <h2 style="font-size: 1.45rem; font-weight: 900; color: #0b1329; letter-spacing: -0.02em; border-bottom: 1px solid rgba(11, 19, 41, 0.06); padding-bottom: 0.75rem; margin-bottom: 2rem;">
+        <span style="font-size: 0.72rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 0.25rem;">Sanctuary Life</span>
+        <h2 style="font-size: 1.45rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em; border-bottom: 1px solid rgba(30, 41, 59, 0.08); padding-bottom: 0.75rem; margin-bottom: 2rem;">
             📸 Glances of Praise &amp; Ministry Life
         </h2>
 
@@ -130,23 +129,23 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;" class="church-visual-grid">
             {% for asset in church_gallery %}
                 <!-- Cinematic Image Container Box -->
-                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; box-shadow: 0 10px 30px -15px rgba(11,19,41,0.08); border: none;">
+                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; box-shadow: 0 10px 30px -15px rgba(30,41,59,0.08); border: none;">
 
                     <!-- Dynamic Landscape Photo Render -->
                     <img src="{{ asset.image.url }}" alt="{{ asset.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);" class="gallery-photo-zoom">
 
                     <!-- Sleek Gradient Underlay Shadow Overlay -->
-                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem 1.5rem 1.25rem 1.5rem; background: linear-gradient(to top, rgba(11,19,41,0.85) 0%, rgba(11,19,41,0) 100%); text-align: left;">
+                    <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem 1.5rem 1.25rem 1.5rem; background: linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0) 100%); text-align: left;">
                         <strong style="color: #ffffff; font-size: 0.95rem; font-weight: 800; letter-spacing: -0.01em; display: block;">{{ asset.title }}</strong>
                     </div>
                 </div>
             {% empty %}
-                <!-- Clean Empty State Placeholder: Displaying a beautiful stock church card layout if database is empty -->
-                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; border: none; background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 100%); display: flex; align-items: center; justify-content: center;">
+                <!-- Clean Empty State Placeholder Layout -->
+                <div class="sanctuary-card" style="padding: 0; overflow: hidden; position: relative; height: 260px; border-radius: 4px; border: none; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); display: flex; align-items: center; justify-content: center;">
                     <div style="text-align: center; padding: 2rem; color: #ffffff;">
                         <span style="font-size: 1.75rem; display: block; margin-bottom: 0.4rem;">🌟</span>
-                        <strong style="font-size: 0.92rem; font-weight: 800; display: block; letter-spacing: 0.02em; text-transform: uppercase; color: #dfb15b;">Sanctuary Doors Open</strong>
-                        <p style="font-size: 0.8rem; color: #cbd5e1; font-weight: 500; margin-top: 0.25rem;">PEFA Thika Road Cathedral Altar Gallery. Upload snapshots via your pastor admin desk.</p>
+                        <strong style="font-size: 0.92rem; font-weight: 800; display: block; letter-spacing: 0.02em; text-transform: uppercase; color: #991b1b;">Sanctuary Doors Open</strong>
+                        <p style="font-size: 0.8rem; color: #cbd5e1; font-weight: 500; margin-top: 0.25rem;">Mercy Seat Transformational Ministries Gallery. Upload snapshots via your pastor admin desk.</p>
                     </div>
                 </div>
             {% endfor %}

@@ -4,15 +4,15 @@
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem;">
 
     <!-- 👑 PRIVATE DASHBOARD TERMINAL HEADER -->
-    <div style="background: linear-gradient(135deg, #0b1329 0%, #4a5568 100%); padding: 2.5rem; border-radius: 4px; color: #ffffff; margin-bottom: 3rem; box-shadow: 0 10px 40px -20px rgba(11, 19, 41, 0.15);">
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 2.5rem; border-radius: 4px; color: #ffffff; margin-bottom: 3rem; box-shadow: 0 10px 40px -20px rgba(15, 23, 42, 0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
             <div style="text-align: left;">
-                <span style="font-size: 0.75rem; font-weight: 800; color: #dfb15b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem;">Pastoral Leadership Space</span>
+                <span style="font-size: 0.75rem; font-weight: 800; color: #991b1b; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem;">Pastoral Leadership Space</span>
                 <h1 style="font-size: 2rem; font-weight: 900; letter-spacing: -0.03em; margin: 0; text-transform: uppercase;">Ministry Metrics Dashboard</h1>
                 <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 0.5rem; margin-bottom: 0;">Real-time analytical metrics snapshot tracking the digital congregational outreach channels.</p>
             </div>
             <div>
-                <a href="{% url 'pastor_admin_desk' %}" class="btn-kingdom" style="background-color: #dfb15b; color: #ffffff; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 800; font-size: 0.88rem; display: inline-block; box-shadow: 0 6px 15px -5px rgba(223, 177, 91, 0.4);">⛪ Return to Administrative Desk</a>
+                <a href="{% url 'pastor_admin_desk' %}" class="btn-kingdom" style="background-color: #991b1b; color: #ffffff; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 800; font-size: 0.88rem; display: inline-block; box-shadow: 0 6px 15px -5px rgba(153, 27, 27, 0.4);">⛪ Return to Administrative Desk</a>
             </div>
         </div>
     </div>
@@ -23,21 +23,21 @@
         <!-- Counter Box 1: Unread Prayer Requests Box -->
         <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #ef4444; margin-bottom: 0;">
             <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📥</span>
-            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_pending }}</strong>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #1e293b; display: block; line-height: 1.1;">{{ total_pending }}</strong>
             <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Unread Petitions</span>
         </div>
 
         <!-- Counter Box 2: Total Catalogued Sermons Media -->
-        <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #1e3a8a; margin-bottom: 0;">
+        <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #991b1b; margin-bottom: 0;">
             <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📖</span>
-            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_sermons }}</strong>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #1e293b; display: block; line-height: 1.1;">{{ total_sermons }}</strong>
             <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Published Sermons</span>
         </div>
 
         <!-- Counter Box 3: Total Scheduled Church Events Calendar -->
         <div class="sanctuary-card" style="padding: 2rem; text-align: center; border-left: 4px solid #475569; margin-bottom: 0;">
             <span style="font-size: 2rem; display: block; margin-bottom: 0.25rem;">📅</span>
-            <strong style="font-size: 2.5rem; font-weight: 900; color: #0b1329; display: block; line-height: 1.1;">{{ total_events }}</strong>
+            <strong style="font-size: 2.5rem; font-weight: 900; color: #1e293b; display: block; line-height: 1.1;">{{ total_events }}</strong>
             <span style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; display: block; margin-top: 0.5rem;">Calendar Programs</span>
         </div>
 
@@ -47,16 +47,16 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;" class="dashboard-charts-row">
 
         <!-- Graph Box A: Tithes & Offerings Allocations (Donut Chart) -->
-        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(11, 19, 41, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03); margin-bottom: 0; min-height: 380px;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: #0b1329; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -0.01em; text-align: left;">🍩 Tithes &amp; Offerings Allocation</h3>
+        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(30, 41, 59, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03); margin-bottom: 0; min-height: 380px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -0.01em; text-align: left;">🍩 Tithes &amp; Offerings Allocation</h3>
             <div style="position: relative; width: 100%; height: 260px;">
                 <canvas id="categoryDonutChart"></canvas>
             </div>
         </div>
 
         <!-- Graph Box B: Weekly Revenue Inflow Streams (Trend Line Chart) -->
-        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(11, 19, 41, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03); margin-bottom: 0; min-height: 380px;">
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: #0b1329; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -0.01em; text-align: left;">📈 Weekly Revenue Streams Trend</h3>
+        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(30, 41, 59, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03); margin-bottom: 0; min-height: 380px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -0.01em; text-align: left;">📈 Weekly Revenue Streams Trend</h3>
             <div style="position: relative; width: 100%; height: 260px;">
                 <canvas id="weeklyTrendLineChart"></canvas>
             </div>
@@ -67,76 +67,77 @@
     <!-- ⚡ PASTORAL WORKSPACE MANAGEMENT: TWO-COLUMN FORM SIDE-BY-SIDE SPLIT GRID -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;">
         <!-- MODULE 1: OUTBOUND PASTORAL WELFARE B2C REGISTRY DISBURSEMENT PANEL DRAWER -->
-        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(11, 19, 41, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03); margin-bottom: 0; display: flex; flex-direction: column; gap: 2rem;">
+        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(30, 41, 59, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03); margin-bottom: 0; display: flex; flex-direction: column; gap: 2rem;">
 
             <!-- A: Outbound B2C Welfare Payout Form Section -->
             <div>
-                <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; margin-bottom: 1.5rem; text-align: left;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #0b1329; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">💸 Outward B2C Welfare Payout</h3>
+                <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem; text-align: left;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">💸 Outward B2C Welfare Payout</h3>
                     <p style="font-size: 0.8rem; color: #64748b; margin: 0.25rem 0 0 0;">Transfer ministerial mercy support tokens directly from church Paybill accounts.</p>
                 </div>
                 <form method="POST" action="{% url 'trigger_pastoral_b2c' %}" style="display: flex; flex-direction: column; gap: 1.15rem; text-align: left;">
                     {% csrf_token %}
                     <div>
-                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Beneficiary Number</label>
+                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Beneficiary Number</label>
                         <input type="text" name="phone_number" class="form-church-control" placeholder="e.g. 254712345678" style="margin-top: 0; padding: 0.85rem 1rem; height: auto;" required>
                     </div>
                     <div>
-                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Amount (KES)</label>
+                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Amount (KES)</label>
                         <input type="number" name="amount" class="form-church-control" placeholder="e.g. 2500" min="50" style="margin-top: 0; padding: 0.85rem 1rem; height: auto;" required>
                     </div>
                     <div>
-                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Remarks / Allocation Purpose</label>
+                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Remarks / Allocation Purpose</label>
                         <input type="text" name="remarks" class="form-church-control" placeholder="e.g. Welfare Support Allocation" style="margin-top: 0; padding: 0.85rem 1rem; height: auto;" required>
                     </div>
-                    <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #0b1329; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #0f172a; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">
                         🚀 Initiate Outbound Disbursement
                     </button>
                 </form>
             </div>
 
             <!-- 📥 B: NEW EXCEL/CSV DATA SPREADSHEET IMPORTER SECTION -->
-            <div style="border-top: 2px dashed rgba(11, 19, 41, 0.08); padding-top: 2rem;">
-                <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; margin-bottom: 1.5rem; text-align: left;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #0b1329; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">📥 Bulk Import Ledger Logs</h3>
+            <div style="border-top: 2px dashed rgba(30, 41, 59, 0.08); padding-top: 2rem;">
+                <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem; text-align: left;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">📥 Bulk Import Ledger Logs</h3>
                     <p style="font-size: 0.8rem; color: #64748b; margin: 0.25rem 0 0 0;">Upload historical church transaction backup sheets (.csv) directly into your live tables.</p>
                 </div>
 
                 <form method="POST" action="{% url 'import_financial_ledger_csv' %}" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.15rem; text-align: left;">
                     {% csrf_token %}
                     <div>
-                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #0b1329; margin-bottom: 0.35rem;">Select Spreadsheet File (.csv)</label>
-                        <input type="file" name="excel_file" accept=".csv" required style="width: 100%; padding: 0.85rem 1rem; background-color: #faf9f6; border: 1px solid rgba(11, 19, 41, 0.08); border-radius: 4px; font-size: 0.9rem;">
+                        <label style="display: block; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b; margin-bottom: 0.35rem;">Select Spreadsheet File (.csv)</label>
+                        <input type="file" name="excel_file" accept=".csv" required style="width: 100%; padding: 0.85rem 1rem; background-color: #f1f5f9; border: 1px solid rgba(30, 41, 59, 0.08); border-radius: 4px; font-size: 0.9rem;">
                         <small style="display: block; font-size: 0.72rem; color: #64748b; margin-top: 0.35rem; line-height: 1.35;">Ensure columns line up with the standard structure exported from your audit desk table.</small>
                     </div>
-                    <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #dfb15b; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 6px 15px -5px rgba(223, 177, 91, 0.4);">
+                    <button type="submit" class="btn-kingdom" style="width: 100%; background-color: #991b1b; color: #ffffff; border: none; padding: 1.1rem; font-weight: 800; border-radius: 4px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 6px 15px -5px rgba(153, 27, 27, 0.4);">
                         ⚡ Execute Sheet Import
                     </button>
                 </form>
             </div>
 
         </div> <!-- Correctly finishes the combined container card -->
+
         <!-- MODULE 2: REAL-TIME TRANSACTION AUDITING REPOSITORY TABLE -->
-        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(11, 19, 41, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03); margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="sanctuary-card" style="background-color: #ffffff; border: 1px solid rgba(30, 41, 59, 0.05); border-radius: 4px; padding: 2rem; box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03); margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <!-- 📥 RE-ARCHITECTED TOOLBAR AREA WITH EXPORT EXCEL PIPELINE INNER ANCHOR BUTTON -->
-                <div style="border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                <div style="border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
                     <div style="text-align: left;">
-                        <h3 style="font-size: 1.25rem; font-weight: 800; color: #0b1329; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">📊 Financial Audit Desk</h3>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: -0.01em;">📊 Financial Audit Desk</h3>
                         <p style="font-size: 0.8rem; color: #64748b; margin: 0.25rem 0 0 0;">Live tracking logs capturing online kingdom seeds and outbound wallet distributions.</p>
                     </div>
                     <div>
                         <!-- 📥 RE-ARCHITECTED EXPORT BUTTON PIPELINE LINK -->
-                        <a href="{% url 'export_financial_ledger_csv' %}" class="btn-kingdom" style="background-color: #faf9f6; border: 1px solid rgba(11, 19, 41, 0.08); color: #0b1329; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 800; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; box-shadow: none; text-transform: uppercase; letter-spacing: 0.04em;">
+                        <a href="{% url 'export_financial_ledger_csv' %}" class="btn-kingdom" style="background-color: #f1f5f9; border: 1px solid rgba(30, 41, 59, 0.08); color: #1e293b; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 800; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; box-shadow: none; text-transform: uppercase; letter-spacing: 0.04em;">
                             📥 Export Excel Sheet
                         </a>
                     </div>
                 </div>
 
-                <div style="overflow-x: auto; width: 100%; border-radius: 4px; border: 1px solid rgba(11, 19, 41, 0.08);">
+                <div style="overflow-x: auto; width: 100%; border-radius: 4px; border: 1px solid rgba(30, 41, 59, 0.08);">
                     <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; min-width: 450px;">
                         <thead>
-                            <tr style="background-color: #faf9f6; border-bottom: 2px solid rgba(11, 19, 41, 0.08); color: #4a5568; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">
+                            <tr style="background-color: #f1f5f9; border-bottom: 2px solid rgba(30, 41, 59, 0.08); color: #475569; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">
                                 <th style="padding: 0.85rem 1rem;">Receipt/Ref</th>
                                 <th style="padding: 0.85rem 1rem;">Giver Details</th>
                                 <th style="padding: 0.85rem 1rem;">Amount</th>
@@ -145,21 +146,21 @@
                         </thead>
                         <tbody>
                             {% for tx in transactions %}
-                                <tr style="border-bottom: 1px solid rgba(11, 19, 41, 0.05); color: #4a5568;">
-                                    <td style="padding: 0.85rem 1rem; font-weight: 700; color: #0b1329; text-align: left;">
+                                <tr style="border-bottom: 1px solid rgba(30, 41, 59, 0.05); color: #475569;">
+                                    <td style="padding: 0.85rem 1rem; font-weight: 700; color: #1e293b; text-align: left;">
                                         {{ tx.mpesa_receipt|default:tx.id }}<br>
                                         <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 500;">{{ tx.get_transaction_type_display }}</span>
                                     </td>
                                     <td style="padding: 0.85rem 1rem; text-align: left;">
-                                        <span style="font-weight: 600; color: #0b1329;">{{ tx.first_name|default:"Member Giver" }}</span><br>
+                                        <span style="font-weight: 600; color: #1e293b;">{{ tx.first_name|default:"Member Giver" }}</span><br>
                                         <span style="font-size: 0.75rem; color: #64748b;">📞 {{ tx.phone_number }} &bull; 🏷️ {{ tx.account_reference }}</span>
                                     </td>
-                                    <td style="padding: 0.85rem 1rem; font-weight: 700; text-align: left; {% if tx.transaction_type == 'B2C' %}color: #dc2626;{% else %}color: #16a34a;{% endif %}">
+                                    <td style="padding: 0.85rem 1rem; font-weight: 700; text-align: left; {% if tx.transaction_type == 'B2C' %}color: #dc2626;{% else %}color: #15803d;{% endif %}">
                                         {% if tx.transaction_type == 'B2C' %}-{% else %}+{% endif %}KES {{ tx.amount }}
                                     </td>
                                     <td style="padding: 0.85rem 1rem; text-align: right;">
                                         <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.25rem 0.5rem; border-radius: 4px;
-                                            {% if tx.status == 'COMPLETED' %}background-color: #dcfce7; color: #16a34a;
+                                            {% if tx.status == 'COMPLETED' %}background-color: #dcfce7; color: #15803d;
                                             {% elif tx.status == 'PENDING' %}background-color: #fef3c7; color: #d97706;
                                             {% else %}background-color: #fee2e2; color: #dc2626;{% endif %}">
                                             {{ tx.get_status_display }}
@@ -177,15 +178,15 @@
                 🛡️ Live Encrypted Safaricom Daraja Hub Syncing Node Enabled
             </div>
         </div>
-
     </div> <!-- 📜 CRITICAL ALIGNMENT FIX: Closes the side-by-side split grid container cleanly -->
+
     <!-- 📋 HISTORICAL ARCHIVED REVIEWS ROW MODULE -->
-    <div class="sanctuary-card" style="padding: 2.5rem; background-color: #ffffff; border: 1px solid rgba(11, 19, 41, 0.05); border-radius: 4px; box-shadow: 0 15px 45px -15px rgba(11, 19, 41, 0.03); margin-top: 4rem; clear: both; display: block; width: 100%;">
-        <h3 style="font-size: 1.35rem; font-weight: 800; color: #0b1329; margin-bottom: 1.5rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.75rem; text-align: left; text-transform: uppercase; letter-spacing: -0.01em;">📋 Recently Cleared &amp; Archived Intercessory History</h3>
+    <div class="sanctuary-card" style="padding: 2.5rem; background-color: #ffffff; border: 1px solid rgba(30, 41, 59, 0.05); border-radius: 4px; box-shadow: 0 15px 45px -15px rgba(30, 41, 59, 0.03); margin-top: 4rem; clear: both; display: block; width: 100%;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; text-align: left; text-transform: uppercase; letter-spacing: -0.01em;">📋 Recently Cleared &amp; Archived Intercessory History</h3>
         <div style="overflow-x: auto; width: 100%;">
             <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; min-width: 600px;">
                 <thead>
-                    <tr style="background-color: #faf9f6; border-bottom: 2px solid rgba(11, 19, 41, 0.08); color: #4a5568; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.78rem;">
+                    <tr style="background-color: #f1f5f9; border-bottom: 2px solid rgba(30, 41, 59, 0.08); color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.78rem;">
                         <th style="padding: 1rem;">Congregant Name</th>
                         <th style="padding: 1rem;">Callback Phone</th>
                         <th style="padding: 1rem; width: 60%;">Petition Details</th>
@@ -194,7 +195,7 @@
 
                 <tbody>
                     {% for prayer in reviewed_prayers %}
-                        <tr style="border-bottom: 1px solid rgba(11, 19, 41, 0.05); color: #4a5568;">
+                        <tr style="border-bottom: 1px solid rgba(30, 41, 59, 0.05); color: #475569;">
                             <td style="padding: 1rem; font-weight: 700; color: #64748b; text-align: left;">👤 {{ prayer.sender_name }}</td>
                             <td style="padding: 1rem; font-weight: 600; text-align: left;">{{ prayer.sender_phone|default:"None Provided" }}</td>
                             <td style="padding: 1rem; line-height: 1.5; font-style: italic; text-align: left;">"{{ prayer.prayer_items }}"</td>
@@ -227,9 +228,8 @@
             data: {
                 labels: categoryLabels.length > 0 ? categoryLabels : ['No Record Logs'],
                 datasets: [{
-                    // ✨ FIX: Changed trailing colon to an empty array fallback []
                     data: categoryData.length > 0 ? categoryData : [],
-                    backgroundColor: ['#0b1329', '#dfb15b', '#1e3a8a', '#475569', '#cbd5e1'],
+                    backgroundColor: ['#0f172a', '#991b1b', '#1e3a8a', '#475569', '#cbd5e1'],
                     borderWidth: 2,
                     borderColor: '#ffffff'
                 }]
@@ -251,22 +251,21 @@
                 labels: trendLabels.length > 0 ? trendLabels : ['No Data'],
                 datasets: [{
                     label: 'Weekly Collection Flow (KES)',
-                    // ✨ FIX: Changed trailing colon to an empty array fallback []
                     data: trendData.length > 0 ? trendData : [],
-                    borderColor: '#dfb15b',
-                    backgroundColor: 'rgba(223, 177, 91, 0.05)',
+                    borderColor: '#991b1b',
+                    backgroundColor: 'rgba(153, 27, 27, 0.05)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.3,
                     pointRadius: 4,
-                    pointBackgroundColor: '#0b1329'
+                    pointBackgroundColor: '#0f172a'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    y: { beginAtZero: true, grid: { color: 'rgba(11, 19, 41, 0.04)' } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(30, 41, 59, 0.04)' } },
                     x: { grid: { display: false } }
                 },
                 plugins: {
